@@ -71,7 +71,8 @@ function initMobileMenu() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
@@ -91,6 +92,14 @@ function initMobileMenu() {
                 hamburger.classList.remove('active');
             }
         });
+        
+        // 窗口大小改变时关闭菜单
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
     }
 }
 
@@ -101,17 +110,34 @@ function initWorldMap() {
     const locations = document.querySelectorAll('.location');
     
     locations.forEach(location => {
-        location.addEventListener('click', function() {
+        // 添加点击事件
+        location.addEventListener('click', function(e) {
+            e.preventDefault();
             const locationName = this.classList[1];
             showLocationInfo(locationName);
         });
         
+        // 添加键盘支持
+        location.setAttribute('tabindex', '0');
+        location.setAttribute('role', 'button');
+        
+        location.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const locationName = this.classList[1];
+                showLocationInfo(locationName);
+            }
+        });
+        
+        // 悬停效果
         location.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.1)';
+            this.style.zIndex = '10';
         });
         
         location.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
+            this.style.zIndex = '1';
         });
     });
 }
@@ -122,32 +148,172 @@ function showLocationInfo(locationName) {
             name: 'Vancouver, Canada',
             university: 'University of British Columbia',
             period: '2020-2024',
-            research: 'Environmental Science studies and urban sustainability research'
+            research: 'Environmental Science studies and urban sustainability research',
+            details: 'Completed Bachelor\'s degree in Environmental Science with focus on sustainable urban development and environmental policy.'
         },
         netherlands: {
             name: 'Wageningen, Netherlands',
             university: 'Wageningen University & Research',
             period: '2024-2026',
-            research: 'Current Master\'s program in Urban Environmental Management'
+            research: 'Current Master\'s program in Urban Environmental Management',
+            details: 'Currently pursuing Master\'s degree with focus on water systems, climate change adaptation, and sustainable urban development.'
         },
         finland: {
             name: 'Joensuu, Finland',
             university: 'University of Eastern Finland',
             period: '2023-2024',
-            research: 'Forest ecosystem research and climate change studies'
+            research: 'Forest ecosystem research and climate change studies',
+            details: 'Conducted research in Varrio Research Forest on climate change impacts on forest ecosystems and biodiversity.'
         },
         china: {
             name: 'Hangzhou, China',
             university: 'Zhejiang University',
             period: '2022-2023',
-            research: 'Urban environmental assessment and sustainable development'
+            research: 'Urban environmental assessment and sustainable development',
+            details: 'Worked on urban sustainability assessment projects and environmental impact evaluations for Chinese cities.'
         }
     };
     
     const data = locationData[locationName];
     if (data) {
-        alert(`${data.name}\n${data.university}\n${data.period}\n${data.research}`);
+        // 创建模态框显示详细信息
+        showLocationModal(data);
     }
+}
+
+function showLocationModal(data) {
+    // 创建模态框
+    const modal = document.createElement('div');
+    modal.className = 'location-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${data.name}</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="location-info">
+                        <div class="info-item">
+                            <strong>University:</strong> ${data.university}
+                        </div>
+                        <div class="info-item">
+                            <strong>Period:</strong> ${data.period}
+                        </div>
+                        <div class="info-item">
+                            <strong>Research Focus:</strong> ${data.research}
+                        </div>
+                        <div class="info-item">
+                            <strong>Details:</strong> ${data.details}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .location-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+        }
+        
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header h3 {
+            color: var(--primary-color);
+            font-size: var(--text-xl);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: var(--text-2xl);
+            cursor: pointer;
+            padding: var(--space-2);
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: var(--space-6);
+        }
+        
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        
+        .info-item {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .info-item strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    
+    // 关闭模态框
+    const closeModal = () => {
+        document.body.removeChild(modal);
+        document.head.removeChild(style);
+    };
+    
+    modal.querySelector('.modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+    
+    // ESC键关闭
+    const handleEsc = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            document.removeEventListener('keydown', handleEsc);
+        }
+    };
+    document.addEventListener('keydown', handleEsc);
 }
 
 // ========================================
@@ -213,15 +379,34 @@ function initContactForm() {
             e.preventDefault();
             
             // 获取表单数据
-            const formData = new FormData(form);
-            const name = form.querySelector('input[type="text"]').value;
-            const email = form.querySelector('input[type="email"]').value;
-            const subject = form.querySelectorAll('input[type="text"]')[1].value;
-            const message = form.querySelector('textarea').value;
+            const inputs = form.querySelectorAll('input, textarea');
+            const formData = {};
+            let isValid = true;
             
-            // 简单验证
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields.');
+            inputs.forEach(input => {
+                const value = input.value.trim();
+                formData[input.type || 'text'] = value;
+                
+                // 验证必填字段
+                if (!value) {
+                    input.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+                
+                // 验证邮箱格式
+                if (input.type === 'email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        input.style.borderColor = '#ef4444';
+                        isValid = false;
+                    }
+                }
+            });
+            
+            if (!isValid) {
+                showNotification('Please fill in all fields correctly.', 'error');
                 return;
             }
             
@@ -232,14 +417,92 @@ function initContactForm() {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
+            // 模拟网络延迟
             setTimeout(() => {
-                alert('Thank you for your message! I will get back to you soon.');
+                showNotification('Thank you for your message! I will get back to you soon.', 'success');
                 form.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
+                
+                // 重置所有输入框样式
+                inputs.forEach(input => {
+                    input.style.borderColor = '';
+                });
             }, 2000);
         });
+        
+        // 实时验证
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    this.style.borderColor = '#22c55e';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
+        });
     }
+}
+
+// 通知系统
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius-lg);
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification-success {
+            background: #22c55e;
+        }
+        
+        .notification-error {
+            background: #ef4444;
+        }
+        
+        .notification-info {
+            background: var(--primary-color);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+    `;
+    
+    if (!document.querySelector('#notification-styles')) {
+        style.id = 'notification-styles';
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(notification);
+    
+    // 显示动画
+    setTimeout(() => notification.classList.add('show'), 100);
+    
+    // 自动隐藏
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
 }
 
 // ========================================
