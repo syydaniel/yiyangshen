@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initContactForm();
     initScrollEffects();
+    initNameRotation();
 });
 
 // ========================================
@@ -25,6 +26,39 @@ function initScrollEffects() {
             navbar.classList.remove('scrolled');
         }
     });
+}
+
+// ========================================
+// 名字自动切换
+// ========================================
+function initNameRotation() {
+    const nameElement = document.querySelector('.name-text');
+    if (!nameElement) return;
+    
+    const names = JSON.parse(nameElement.dataset.names);
+    let currentIndex = 0;
+    
+    function rotateName() {
+        // 淡出效果
+        nameElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+            // 更新名字
+            currentIndex = (currentIndex + 1) % names.length;
+            nameElement.textContent = names[currentIndex];
+            
+            // 淡入效果
+            nameElement.classList.remove('fade-out');
+            nameElement.classList.add('fade-in');
+            
+            setTimeout(() => {
+                nameElement.classList.remove('fade-in');
+            }, 500);
+        }, 500);
+    }
+    
+    // 每3秒切换一次
+    setInterval(rotateName, 3000);
 }
 
 // ========================================
