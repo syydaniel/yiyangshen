@@ -118,39 +118,53 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-4) 0;
+    padding: var(--space-4) var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .nav-logo {
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--primary-color);
+    letter-spacing: -0.5px;
+    transition: var(--transition);
+}
+
+.nav-logo:hover {
+    color: var(--primary-color);
+    transform: scale(1.02);
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: var(--space-8);
+    gap: var(--space-6);
+    align-items: center;
 }
 
 .nav-link {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
     position: relative;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
 }
 
 .nav-link:hover {
     color: var(--primary-color);
-    background: rgba(34, 211, 238, 0.1);
+    background: rgba(34, 211, 238, 0.08);
+    transform: translateY(-1px);
 }
 
 .nav-link.active {
     color: var(--primary-color);
-    background: rgba(34, 211, 238, 0.15);
+    background: rgba(34, 211, 238, 0.12);
+    font-weight: 600;
 }
 
 .nav-link.active::after {
@@ -159,7 +173,7 @@ body {
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 20px;
+    width: 24px;
     height: 2px;
     background: var(--primary-color);
     border-radius: 1px;
@@ -906,6 +920,10 @@ section:nth-child(even) {
    响应式设计
    ======================================== */
 @media (max-width: 768px) {
+    .nav-container {
+        padding: var(--space-3) var(--space-4);
+    }
+    
     .hamburger {
         display: flex;
     }
@@ -922,6 +940,7 @@ section:nth-child(even) {
         transition: var(--transition);
         border-top: 1px solid var(--border-color);
         z-index: 999;
+        gap: var(--space-2);
     }
     
     .nav-menu.active {
@@ -929,18 +948,26 @@ section:nth-child(even) {
     }
     
     .nav-menu li {
-        margin: var(--space-2) 0;
+        margin: 0;
+        width: 100%;
     }
     
     .nav-menu .nav-link {
         display: block;
-        padding: var(--space-3) var(--space-4);
+        padding: var(--space-4) var(--space-6);
         border-radius: var(--radius-lg);
         transition: var(--transition);
+        text-align: center;
+        width: 100%;
     }
     
     .nav-menu .nav-link:hover {
         background: var(--bg-card);
+        transform: none;
+    }
+    
+    .nav-logo {
+        font-size: var(--text-lg);
     }
     
     .hero-content {
