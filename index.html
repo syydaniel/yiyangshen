@@ -160,63 +160,78 @@
                 <p class="map-subtitle" id="map-description">Click on the locations to explore my research experiences. Use keyboard navigation with Tab and Enter keys.</p>
                 <div class="world-map">
                     <svg viewBox="0 0 1000 500" class="map-svg" role="img" aria-labelledby="map-title" aria-describedby="map-description">
-                        <!-- 极简主义世界地图背景 -->
+                        <!-- 专业科技感世界地图背景 -->
                         <defs>
                             <linearGradient id="oceanGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#0a0a0f;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#111118;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1a1a24;stop-opacity:1" />
                             </linearGradient>
                             <linearGradient id="landGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#e2e8f0;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#cbd5e1;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#334155;stop-opacity:0.8" />
+                                <stop offset="100%" style="stop-color:#475569;stop-opacity:0.6" />
                             </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge> 
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
                         </defs>
                         
                         <!-- 海洋背景 -->
                         <rect width="1000" height="500" fill="url(#oceanGradient)"/>
                         
-                        <!-- 极简大陆轮廓 -->
+                        <!-- 专业大陆轮廓 - 更准确的地理位置 -->
                         <!-- 北美洲 -->
-                        <path class="continent north-america" d="M50,100 L150,80 L200,90 L220,120 L200,160 L180,200 L150,220 L120,200 L80,180 L60,150 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent north-america" d="M80,80 L200,60 L280,80 L300,120 L280,180 L250,220 L200,240 L150,220 L100,180 L80,120 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
                         <!-- 南美洲 -->
-                        <path class="continent south-america" d="M150,250 L200,240 L220,280 L200,350 L180,400 L150,380 L130,320 L140,280 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent south-america" d="M200,280 L280,270 L300,320 L280,400 L250,450 L200,430 L180,380 L190,320 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
                         <!-- 欧洲 -->
-                        <path class="continent europe" d="M400,120 L500,110 L520,140 L500,180 L480,200 L450,190 L420,160 L400,140 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent europe" d="M450,100 L550,90 L580,120 L560,180 L530,200 L500,190 L470,160 L450,130 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
                         <!-- 非洲 -->
-                        <path class="continent africa" d="M450,200 L550,190 L570,250 L550,350 L530,400 L500,380 L470,320 L450,250 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent africa" d="M500,200 L600,190 L620,250 L600,350 L570,400 L530,380 L500,320 L490,250 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
                         <!-- 亚洲 -->
-                        <path class="continent asia" d="M500,80 L700,70 L750,100 L800,120 L850,150 L800,200 L750,250 L700,220 L650,180 L600,150 L550,120 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent asia" d="M550,60 L800,50 L850,80 L900,120 L950,180 L900,250 L850,300 L800,280 L750,240 L700,200 L650,160 L600,120 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
                         <!-- 大洋洲 -->
-                        <path class="continent oceania" d="M650,350 L750,340 L780,380 L750,420 L700,430 L650,400 Z" fill="url(#landGradient)" stroke="none"/>
+                        <path class="continent oceania" d="M750,380 L850,370 L880,410 L850,450 L800,460 L750,430 Z" fill="url(#landGradient)" stroke="rgba(34, 211, 238, 0.2)" stroke-width="0.5"/>
                         
-                        <!-- 研究位置点 - 参考设计风格 -->
-                        <!-- China (Hangzhou) - 绿色圆点 -->
-                        <g class="location-group china" transform="translate(750, 320)" role="button" tabindex="0" aria-label="Research location: Hangzhou, China" aria-describedby="china-details">
-                            <circle class="research-location china" cx="0" cy="0" r="8" fill="#22c55e" stroke="none" aria-hidden="true"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#374151" font-size="11" font-weight="500" aria-hidden="true">Hangzhou</text>
+                        <!-- 研究位置点 - 真实坐标对应 -->
+                        <!-- China (Hangzhou) - 青蓝色圆点 -->
+                        <g class="location-group china" transform="translate(820, 200)" role="button" tabindex="0" aria-label="Research location: Hangzhou, China" aria-describedby="china-details">
+                            <circle class="research-location china" cx="0" cy="0" r="10" fill="#22d3ee" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" aria-hidden="true" filter="url(#glow)"/>
+                            <text class="location-label" x="0" y="30" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="600" aria-hidden="true">Hangzhou</text>
                         </g>
                         
-                        <!-- Canada (Vancouver) - 绿色圆点 -->
-                        <g class="location-group canada" transform="translate(150, 180)" role="button" tabindex="0" aria-label="Research location: Vancouver, Canada" aria-describedby="canada-details">
-                            <circle class="research-location canada" cx="0" cy="0" r="8" fill="#22c55e" stroke="none" aria-hidden="true"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#374151" font-size="11" font-weight="500" aria-hidden="true">Vancouver</text>
+                        <!-- Canada (Vancouver) - 青蓝色圆点 -->
+                        <g class="location-group canada" transform="translate(120, 140)" role="button" tabindex="0" aria-label="Research location: Vancouver, Canada" aria-describedby="canada-details">
+                            <circle class="research-location canada" cx="0" cy="0" r="10" fill="#22d3ee" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" aria-hidden="true" filter="url(#glow)"/>
+                            <text class="location-label" x="0" y="30" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="600" aria-hidden="true">Vancouver</text>
                         </g>
                         
-                        <!-- Finland (Joensuu) - 绿色圆点 -->
-                        <g class="location-group finland" transform="translate(520, 120)" role="button" tabindex="0" aria-label="Research location: Joensuu, Finland" aria-describedby="finland-details">
-                            <circle class="research-location finland" cx="0" cy="0" r="8" fill="#22c55e" stroke="none" aria-hidden="true"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#374151" font-size="11" font-weight="500" aria-hidden="true">Joensuu</text>
+                        <!-- Finland (Joensuu) - 青蓝色圆点 -->
+                        <g class="location-group finland" transform="translate(520, 110)" role="button" tabindex="0" aria-label="Research location: Joensuu, Finland" aria-describedby="finland-details">
+                            <circle class="research-location finland" cx="0" cy="0" r="10" fill="#22d3ee" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" aria-hidden="true" filter="url(#glow)"/>
+                            <text class="location-label" x="0" y="30" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="600" aria-hidden="true">Joensuu</text>
                         </g>
                         
                         <!-- Netherlands (Wageningen) - 橙色图钉（主要位置） -->
-                        <g class="location-group netherlands" transform="translate(500, 160)" role="button" tabindex="0" aria-label="Current research location: Wageningen, Netherlands" aria-describedby="netherlands-details">
-                            <path class="research-location netherlands" d="M0,-12 L-8,8 L0,4 L8,8 Z" fill="#f97316" stroke="none" aria-hidden="true"/>
-                            <text class="location-label" x="0" y="30" text-anchor="middle" fill="#374151" font-size="11" font-weight="600" aria-hidden="true">Wageningen</text>
+                        <g class="location-group netherlands" transform="translate(500, 150)" role="button" tabindex="0" aria-label="Current research location: Wageningen, Netherlands" aria-describedby="netherlands-details">
+                            <path class="research-location netherlands" d="M0,-15 L-10,10 L0,5 L10,10 Z" fill="#f59e0b" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" aria-hidden="true" filter="url(#glow)"/>
+                            <text class="location-label" x="0" y="35" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700" aria-hidden="true">Wageningen</text>
+                        </g>
+                        
+                        <!-- 连接线 - 显示研究路径 -->
+                        <g class="connection-lines">
+                            <line x1="120" y1="140" x2="500" y2="150" stroke="rgba(34, 211, 238, 0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+                            <line x1="500" y1="150" x2="520" y2="110" stroke="rgba(34, 211, 238, 0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+                            <line x1="520" y1="110" x2="820" y2="200" stroke="rgba(34, 211, 238, 0.4)" stroke-width="2" stroke-dasharray="5,5"/>
                         </g>
                     </svg>
                     
