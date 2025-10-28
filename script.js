@@ -179,7 +179,7 @@ function showLocationInfo(locationName) {
             university: 'Eastern Finland University',
             period: 'May 2025 - Sep 2025',
             research: 'Research Assistant (Internship)',
-            details: 'Department of Environmental and Biological Sciences. Supervisor: Prof. Frank Berninger. Will conduct field samplings in Lapland including DOC emissions from the Kemi River, perform spectral measurements and water incubations, and analyze field samples using GIS.'
+            details: 'Department of Environmental and Biological Sciences. Supervisor: Prof. Frank Berninger. Will conduct field samplings in Lapland including soil water collection, perform spectral measurements in boreal forest, and analyze field samples using GIS.'
         },
         china: {
             name: 'Zhejiang, China',
