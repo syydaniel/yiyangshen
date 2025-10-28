@@ -584,22 +584,22 @@ function closeEasterEgg() {
 
 // 世界地图交互功能
 function initWorldMap() {
-    const locationGroups = document.querySelectorAll('.location-group');
+    const researchLocations = document.querySelectorAll('.research-location');
     const locationItems = document.querySelectorAll('.location-item');
     
-    // 为每个地图点组添加点击事件
-    locationGroups.forEach((group, index) => {
-        group.setAttribute('tabindex', '0');
-        group.setAttribute('role', 'button');
-        group.setAttribute('aria-label', `Research location ${index + 1}`);
+    // 为每个研究位置添加点击事件
+    researchLocations.forEach((location, index) => {
+        location.setAttribute('tabindex', '0');
+        location.setAttribute('role', 'button');
+        location.setAttribute('aria-label', `Research location ${index + 1}`);
         
-        group.addEventListener('click', function() {
+        location.addEventListener('click', function() {
             const locationClass = this.classList[1]; // 获取国家类名
             showLocationDetails(locationClass);
         });
         
         // 键盘导航支持
-        group.addEventListener('keydown', function(e) {
+        location.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const locationClass = this.classList[1];
@@ -608,12 +608,12 @@ function initWorldMap() {
         });
         
         // 添加悬停效果
-        group.addEventListener('mouseenter', function() {
+        location.addEventListener('mouseenter', function() {
             const locationClass = this.classList[1];
             highlightLocationItem(locationClass);
         });
         
-        group.addEventListener('mouseleave', function() {
+        location.addEventListener('mouseleave', function() {
             clearLocationHighlights();
         });
     });

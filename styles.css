@@ -1618,17 +1618,6 @@ h6 {
     animation: slideUp 0.6s ease-out 0.7s both;
 }
 
-.quick-stat {
-    text-align: center;
-}
-
-.quick-stat .stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    line-height: 1;
-}
 
 .quick-stat .stat-label {
     font-size: 0.9rem;
@@ -2189,59 +2178,202 @@ h6 {
     stroke-width: 2;
 }
 
-/* 专业科技感地图交互样式 */
-.location-group {
+/* ASCII艺术风格世界地图 */
+.ascii-world-map {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 1px;
+    padding: var(--space-4);
+}
+
+.map-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 1px;
+    z-index: 1;
+}
+
+.map-row {
+    display: contents;
+}
+
+.map-cell {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-secondary);
+    transition: var(--transition-normal);
+}
+
+.map-cell.ocean {
+    background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.map-cell.land {
+    background: linear-gradient(135deg, var(--color-gray-700) 0%, var(--color-gray-600) 100%);
+    border-color: var(--color-border-accent);
+}
+
+/* 研究位置标记 */
+.research-location {
+    position: absolute;
+    z-index: 10;
     cursor: pointer;
     transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.research-location {
-    transition: var(--transition-normal);
+.location-marker {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.location-group:hover .research-location {
-    transform: scale(1.4);
-    filter: url(#glow) drop-shadow(0 0 20px rgba(34, 211, 238, 0.6));
+.marker-core {
+    width: 12px;
+    height: 12px;
+    background: var(--color-text-accent);
+    border-radius: 50%;
+    border: 2px solid var(--color-bg-primary);
+    z-index: 2;
+    position: relative;
 }
 
-.location-group:hover .location-label {
-    opacity: 1;
-    transform: translateY(-5px);
-    font-weight: 700;
-    fill: var(--color-text-accent);
+.marker-core.primary {
+    background: #f59e0b;
+    width: 16px;
+    height: 16px;
 }
 
-.location-group:focus .research-location {
-    transform: scale(1.3);
-    filter: url(#glow) drop-shadow(0 0 15px rgba(34, 211, 238, 0.8));
+.marker-pulse {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--color-text-accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 2s infinite;
 }
 
-.location-group:focus .location-label {
-    opacity: 1;
-    fill: var(--color-text-accent);
-    font-weight: 700;
+.marker-pulse.primary {
+    background: #f59e0b;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
 }
 
 .location-label {
-    font-family: 'Inter', sans-serif;
-    pointer-events: none;
-    opacity: 0.9;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-bg-primary);
+    color: var(--color-text-accent);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
     transition: var(--transition-normal);
-    transform: translateY(0);
-    fill: var(--color-text-secondary);
-    font-size: 12px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-border-accent);
+    z-index: 3;
+}
+
+.research-location:hover .location-label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.research-location:hover .marker-core {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.6);
+}
+
+.research-location:hover .marker-core.primary {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+.research-location:focus {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
 }
 
 /* 连接线动画 */
-.connection-lines line {
-    stroke-dasharray: 10, 5;
-    animation: dash 3s linear infinite;
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
 }
 
-@keyframes dash {
-    to {
-        stroke-dashoffset: -15;
+.connection-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-text-accent), transparent, var(--color-text-accent));
+    opacity: 0.6;
+    animation: flow 3s linear infinite;
+}
+
+.connection-line[data-from="canada"][data-to="netherlands"] {
+    top: 50%;
+    left: 10%;
+    width: 40%;
+    transform: rotate(-5deg);
+}
+
+.connection-line[data-from="netherlands"][data-to="finland"] {
+    top: 20%;
+    left: 45%;
+    width: 25%;
+    transform: rotate(15deg);
+}
+
+.connection-line[data-from="finland"][data-to="china"] {
+    top: 30%;
+    left: 50%;
+    width: 35%;
+    transform: rotate(-10deg);
+}
+
+@keyframes flow {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
     }
 }
 
