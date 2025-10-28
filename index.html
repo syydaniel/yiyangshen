@@ -25,25 +25,24 @@
                     <a href="#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#research" class="nav-link">Research</a>
+                    <a href="#education" class="nav-link">Education</a>
                 </li>
                 <li class="nav-item">
                     <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
                     <a href="#publications" class="nav-link">Publications</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#posts" class="nav-link">Posts</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contact</a>
                 </li>
             </ul>
-            <div class="nav-search">
-                <input type="text" id="searchInput" placeholder="Search..." class="search-input">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -248,66 +247,113 @@
         </div>
     </section>
 
-    <!-- Current Projects Section -->
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="education-timeline">
+                <div class="education-item">
+                    <div class="education-year">2024 - 2026</div>
+                    <div class="education-content">
+                        <h3 class="education-degree">Master of Urban Environmental Management</h3>
+                        <h4 class="education-school">Wageningen University & Research</h4>
+                        <p class="education-specialization">Water Systems and Global Change</p>
+                        <p class="education-supervisor">Supervisor: Prof. Maryna Strokal</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2021 - 2024</div>
+                    <div class="education-content">
+                        <h3 class="education-degree">Bachelor of Urban Forestry</h3>
+                        <h4 class="education-school">University of British Columbia</h4>
+                        <p class="education-specialization">Green Space Management</p>
+                        <p class="education-gpa">GPA: 83.7/100 (Graduated with Honors)</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2019 - 2024</div>
+                    <div class="education-content">
+                        <h3 class="education-degree">Bachelor of Forestry</h3>
+                        <h4 class="education-school">Zhejiang Agriculture and Forestry University</h4>
+                        <p class="education-specialization">Forest Ecosystem Studies</p>
+                        <p class="education-gpa">GPA: 87.7/100</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Current Research Projects</h2>
+                <h2 class="section-title">Research Projects</h2>
                 <div class="section-line"></div>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
+            
+            <!-- Current Research -->
+            <div class="project-category">
+                <h3 class="category-title">Current Research</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
                         <h3 class="project-title">MARINA-Plastic Retention Optimization</h3>
-                        <div class="project-status">Ongoing</div>
+                        <p class="project-description">Master's thesis research on optimizing plastic retention rates in water systems, focusing on urban environmental management and global change impacts. Broad topic covering water, urban, BGI, and NBS (specific topic to be confirmed Sep 2025).</p>
                     </div>
-                    <p class="project-description">Master's thesis research on optimizing plastic retention rates in water systems, focusing on urban environmental management and global change impacts.</p>
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 40%"></div>
-                        </div>
-                        <span class="progress-text">40% Complete</span>
-                    </div>
-                    <div class="project-tags">
-                        <span class="tag">Water Systems</span>
-                        <span class="tag">Plastic Pollution</span>
-                        <span class="tag">Global Change</span>
+                    <div class="project-card">
+                        <h3 class="project-title">VOC Emissions Research in Lapland</h3>
+                        <p class="project-description">Research Assistant at Eastern Finland University. Conducted field samplings in Lapland including VOC emissions from the Kemi River, performed spectral measurements and water incubations, and analyzed field samples using GIS. Results expected to be published in January 2026.</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">
+            </div>
+
+            <!-- Urban Forestry Research -->
+            <div class="project-category">
+                <h3 class="category-title">Urban Forestry Research</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
                         <h3 class="project-title">Urban Tree Inventory Analysis</h3>
-                        <div class="project-status">Completed</div>
+                        <p class="project-description">Analyzed over 130,000 City of Surrey tree inventory data to identify patterns in tree location, mortality, species distribution, and lifespan. Used advanced statistical methods to understand urban forest dynamics.</p>
                     </div>
-                    <p class="project-description">Analyzed over 130,000 City of Surrey tree inventory data to identify patterns in tree location, mortality, species distribution, and lifespan.</p>
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 100%"></div>
-                        </div>
-                        <span class="progress-text">100% Complete</span>
+                    <div class="project-card">
+                        <h3 class="project-title">Land Surface Temperature Analysis</h3>
+                        <p class="project-description">Investigated the impact of urban structure on surface temperature at UBC (2014-2022) using 30m resolution mapping and random forest modeling. Both personal and group projects focusing on urban heat island effects.</p>
                     </div>
-                    <div class="project-tags">
-                        <span class="tag">Urban Forestry</span>
-                        <span class="tag">Data Analysis</span>
-                        <span class="tag">GIS</span>
+                    <div class="project-card">
+                        <h3 class="project-title">Pollinators and Climate Change Study</h3>
+                        <p class="project-description">Field survey of insects and bumble bees, focusing on their interactive relationship with plants within 18 urban parks in Vancouver. Research on pollinator behavior and climate change impacts in urban environments.</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Land Surface Temperature Analysis</h3>
-                        <div class="project-status">Completed</div>
+            </div>
+
+            <!-- Environmental Microbiology -->
+            <div class="project-category">
+                <h3 class="category-title">Environmental Microbiology</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 class="project-title">Phosphorus-Solubilizing Microorganism Interactions</h3>
+                        <p class="project-description">Conducted research on interactions between phosphorus-solubilizing microorganism (PSM) strains and their effects on plant growth. Led team in proposal writing and project execution at State Key Laboratory of Subtropical Silviculture.</p>
                     </div>
-                    <p class="project-description">Investigated the impact of urban structure on surface temperature at UBC (2014-2022) using 30m resolution mapping and random forest modeling.</p>
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 100%"></div>
-                        </div>
-                        <span class="progress-text">100% Complete</span>
+                    <div class="project-card">
+                        <h3 class="project-title">PSM and Phyllostachys edulis Interactions</h3>
+                        <p class="project-description">Investigated interactions between phosphorus-solubilizing microorganisms and Phyllostachys edulis (bamboo). Responsible for field work and data analysis in forest ecosystem studies.</p>
                     </div>
-                    <div class="project-tags">
-                        <span class="tag">Remote Sensing</span>
-                        <span class="tag">Urban Heat Island</span>
-                        <span class="tag">Machine Learning</span>
+                </div>
+            </div>
+
+            <!-- Leadership & Outreach -->
+            <div class="project-category">
+                <h3 class="category-title">Leadership & Outreach Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 class="project-title">World Without Borders Research</h3>
+                        <p class="project-description">Led research team focusing on people's attitudes toward reintroducing plants and animals into campus environments. Online research project exploring community perspectives on biodiversity restoration.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="project-title">Urban Forestry Database Creation</h3>
+                        <p class="project-description">Volunteer research assistant gathering urban forestry documents for database creation. Contributed to building comprehensive resource library for urban forestry research and practice.</p>
                     </div>
                 </div>
             </div>
@@ -356,6 +402,163 @@
                             Bachelor of Forestry. Conducted research on plant-microbe interactions,
                             phosphorus-solubilizing microorganisms, and forest ecosystem studies. Graduated with 87.7/100.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="publications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Publications</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="publications-coming-soon">
+                <div class="coming-soon-content">
+                    <i class="fas fa-paper-plane"></i>
+                    <h3>Publications Coming Soon</h3>
+                    <p>Research publications are currently in progress and will be available soon.</p>
+                    <div class="publication-status">
+                        <div class="status-item">
+                            <span class="status-icon">📝</span>
+                            <span class="status-text">Master's Thesis (Oct 2025 - Mar 2026)</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-icon">🔬</span>
+                            <span class="status-text">VOC Emissions Research (Expected Jan 2026)</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-icon">🌳</span>
+                            <span class="status-text">Urban Forestry Papers (In Preparation)</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-icon">🌡️</span>
+                            <span class="status-text">Climate Change Studies (Under Review)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Posts Section -->
+    <section id="posts" class="posts">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recent Posts</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="posts-grid">
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-meta">
+                            <span class="post-date">December 2024</span>
+                            <span class="post-platform">LinkedIn</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Research Update: MARINA-Plastic Project</h3>
+                        <p class="post-excerpt">Excited to share progress on my master's thesis research focusing on plastic retention optimization in urban water systems. The intersection of environmental management and global change continues to reveal fascinating insights...</p>
+                        <div class="post-tags">
+                            <span class="post-tag">Research</span>
+                            <span class="post-tag">Water Systems</span>
+                            <span class="post-tag">Sustainability</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-meta">
+                            <span class="post-date">November 2024</span>
+                            <span class="post-platform">LinkedIn</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Urban Forestry Research Insights</h3>
+                        <p class="post-excerpt">Reflecting on my urban tree inventory analysis project at UBC. Analyzing over 130,000 trees revealed interesting patterns in urban forest dynamics and mortality factors...</p>
+                        <div class="post-tags">
+                            <span class="post-tag">Urban Forestry</span>
+                            <span class="post-tag">Data Analysis</span>
+                            <span class="post-tag">UBC</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-meta">
+                            <span class="post-date">October 2024</span>
+                            <span class="post-platform">LinkedIn</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Starting at Wageningen University</h3>
+                        <p class="post-excerpt">Thrilled to begin my Master's in Urban Environmental Management at WUR! Looking forward to diving deep into water systems and global change research under Prof. Maryna Strokal's guidance...</p>
+                        <div class="post-tags">
+                            <span class="post-tag">New Journey</span>
+                            <span class="post-tag">WUR</span>
+                            <span class="post-tag">Graduate Studies</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-meta">
+                            <span class="post-date">September 2024</span>
+                            <span class="post-platform">LinkedIn</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Graduation with Honors from UBC</h3>
+                        <p class="post-excerpt">Proud to graduate with honors from UBC's Urban Forestry program! Grateful for the incredible learning experience and the amazing professors who guided my academic journey...</p>
+                        <div class="post-tags">
+                            <span class="post-tag">Graduation</span>
+                            <span class="post-tag">UBC</span>
+                            <span class="post-tag">Achievement</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-meta">
+                            <span class="post-date">August 2024</span>
+                            <span class="post-platform">LinkedIn</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Pollinator Research Insights</h3>
+                        <p class="post-excerpt">Fascinating findings from our pollinator research in Vancouver's urban parks! The relationship between insects, bumble bees, and plants reveals crucial insights about urban biodiversity and climate change impacts...</p>
+                        <div class="post-tags">
+                            <span class="post-tag">Pollinators</span>
+                            <span class="post-tag">Biodiversity</span>
+                            <span class="post-tag">Climate Change</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
                     </div>
                 </div>
             </div>
@@ -471,9 +674,6 @@
     </button>
 
     <!-- Theme Toggle -->
-    <button id="themeToggle" class="theme-toggle" title="Toggle Theme">
-        <i class="fas fa-moon"></i>
-    </button>
 
     <!-- Easter Eggs -->
     <div id="konamiCode" class="easter-egg hidden">
