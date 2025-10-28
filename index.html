@@ -37,9 +37,6 @@
                     <a href="#publications" class="nav-link">Publications</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#posts" class="nav-link">Posts</a>
-                </li>
-                <li class="nav-item">
                     <a href="#contact" class="nav-link">Contact</a>
                 </li>
             </ul>
@@ -67,45 +64,45 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="geometric-shape">
-                        <div class="inner-pattern">
-                            <div class="pattern-line"></div>
-                            <div class="pattern-line"></div>
-                            <div class="pattern-line"></div>
-                            <div class="molecular-structure">
-                                <div class="molecule"></div>
-                                <div class="molecule"></div>
-                                <div class="molecule"></div>
-                                <div class="bond"></div>
-                                <div class="bond"></div>
+                    <div class="hero-world-map">
+                        <h4 class="map-title-small">Research Journey</h4>
+                        <svg viewBox="0 0 400 200" class="hero-map-svg">
+                            <!-- Simplified world map for hero -->
+                            <path class="continent" d="M60,80 L120,72 L140,88 L128,112 L80,120 L60,100 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                            <path class="continent" d="M40,120 L100,112 L120,128 L112,152 L80,160 L40,140 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                            <path class="continent" d="M160,60 L240,56 L260,72 L248,96 L200,104 L160,80 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                            <path class="continent" d="M280,80 L360,76 L380,92 L368,116 L320,124 L280,100 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                            
+                            <!-- Research locations -->
+                            <!-- China (Hangzhou) -->
+                            <circle class="research-location china" cx="300" cy="112" r="6" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                                <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            
+                            <!-- Canada (Vancouver) -->
+                            <circle class="research-location canada" cx="80" cy="72" r="6" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                                <animate attributeName="r" values="6;10;6" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                            
+                            <!-- Finland (Joensuu) -->
+                            <circle class="research-location finland" cx="200" cy="48" r="6" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                                <animate attributeName="r" values="6;10;6" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            
+                            <!-- Netherlands (Wageningen) -->
+                            <circle class="research-location netherlands" cx="192" cy="72" r="6" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                                <animate attributeName="r" values="6;10;6" dur="2.2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        <div class="research-stats">
+                            <div class="stat-bubble">
+                                <span class="stat-number">4</span>
+                                <span class="stat-label">Countries</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="floating-elements">
-                        <div class="element element-1">
-                            <i class="fas fa-atom"></i>
-                        </div>
-                        <div class="element element-2">
-                            <i class="fas fa-dna"></i>
-                        </div>
-                        <div class="element element-3">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                        <div class="element element-4">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="element element-5">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                    </div>
-                    <div class="research-stats">
-                        <div class="stat-bubble">
-                            <span class="stat-number">3</span>
-                            <span class="stat-label">Universities</span>
-                        </div>
-                        <div class="stat-bubble">
-                            <span class="stat-number">6+</span>
-                            <span class="stat-label">Projects</span>
+                            <div class="stat-bubble">
+                                <span class="stat-number">6+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -509,8 +506,8 @@
             <div class="publications-coming-soon">
                 <div class="coming-soon-content">
                     <i class="fas fa-paper-plane"></i>
-                    <h3>Publications Coming Soon</h3>
-                    <p>Research publications are currently in progress and will be available soon.</p>
+                    <h3>Publications in Progress</h3>
+                    <p>Research publications are currently in progress. Waiting for cooperation and collaboration opportunities.</p>
                     <div class="publication-status">
                         <div class="status-item">
                             <span class="status-icon">📝</span>
@@ -522,11 +519,11 @@
                         </div>
                         <div class="status-item">
                             <span class="status-icon">🌳</span>
-                            <span class="status-text">Urban Forestry Papers (In Preparation)</span>
+                            <span class="status-text">Urban Forestry Papers (Waiting for Cooperation)</span>
                         </div>
                         <div class="status-item">
                             <span class="status-icon">🌡️</span>
-                            <span class="status-text">Climate Change Studies (Under Review)</span>
+                            <span class="status-text">Climate Change Studies (Waiting for Cooperation)</span>
                         </div>
                     </div>
                 </div>
@@ -534,127 +531,6 @@
         </div>
     </section>
 
-    <!-- Posts Section -->
-    <section id="posts" class="posts">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Recent Posts</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="posts-grid">
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-meta">
-                            <span class="post-date">December 2024</span>
-                            <span class="post-platform">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <h3 class="post-title">Research Update: MARINA-Plastic Project</h3>
-                        <p class="post-excerpt">Excited to share progress on my master's thesis research focusing on plastic retention optimization in urban water systems. The intersection of environmental management and global change continues to reveal fascinating insights...</p>
-                        <div class="post-tags">
-                            <span class="post-tag">Research</span>
-                            <span class="post-tag">Water Systems</span>
-                            <span class="post-tag">Sustainability</span>
-                        </div>
-                    </div>
-                    <div class="post-actions">
-                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
-                            <i class="fab fa-linkedin"></i> View on LinkedIn
-                        </a>
-                    </div>
-                </div>
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-meta">
-                            <span class="post-date">November 2024</span>
-                            <span class="post-platform">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <h3 class="post-title">Urban Forestry Research Insights</h3>
-                        <p class="post-excerpt">Reflecting on my urban tree inventory analysis project at UBC. Analyzing over 130,000 trees revealed interesting patterns in urban forest dynamics and mortality factors...</p>
-                        <div class="post-tags">
-                            <span class="post-tag">Urban Forestry</span>
-                            <span class="post-tag">Data Analysis</span>
-                            <span class="post-tag">UBC</span>
-                        </div>
-                    </div>
-                    <div class="post-actions">
-                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
-                            <i class="fab fa-linkedin"></i> View on LinkedIn
-                        </a>
-                    </div>
-                </div>
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-meta">
-                            <span class="post-date">October 2024</span>
-                            <span class="post-platform">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <h3 class="post-title">Starting at Wageningen University</h3>
-                        <p class="post-excerpt">Thrilled to begin my Master's in Urban Environmental Management at WUR! Looking forward to diving deep into water systems and global change research under Prof. Maryna Strokal's guidance...</p>
-                        <div class="post-tags">
-                            <span class="post-tag">New Journey</span>
-                            <span class="post-tag">WUR</span>
-                            <span class="post-tag">Graduate Studies</span>
-                        </div>
-                    </div>
-                    <div class="post-actions">
-                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
-                            <i class="fab fa-linkedin"></i> View on LinkedIn
-                        </a>
-                    </div>
-                </div>
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-meta">
-                            <span class="post-date">September 2024</span>
-                            <span class="post-platform">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <h3 class="post-title">Graduation with Honors from UBC</h3>
-                        <p class="post-excerpt">Proud to graduate with honors from UBC's Urban Forestry program! Grateful for the incredible learning experience and the amazing professors who guided my academic journey...</p>
-                        <div class="post-tags">
-                            <span class="post-tag">Graduation</span>
-                            <span class="post-tag">UBC</span>
-                            <span class="post-tag">Achievement</span>
-                        </div>
-                    </div>
-                    <div class="post-actions">
-                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
-                            <i class="fab fa-linkedin"></i> View on LinkedIn
-                        </a>
-                    </div>
-                </div>
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-meta">
-                            <span class="post-date">August 2024</span>
-                            <span class="post-platform">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <h3 class="post-title">Pollinator Research Insights</h3>
-                        <p class="post-excerpt">Fascinating findings from our pollinator research in Vancouver's urban parks! The relationship between insects, bumble bees, and plants reveals crucial insights about urban biodiversity and climate change impacts...</p>
-                        <div class="post-tags">
-                            <span class="post-tag">Pollinators</span>
-                            <span class="post-tag">Biodiversity</span>
-                            <span class="post-tag">Climate Change</span>
-                        </div>
-                    </div>
-                    <div class="post-actions">
-                        <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="post-link">
-                            <i class="fab fa-linkedin"></i> View on LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
