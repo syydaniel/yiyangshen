@@ -1325,28 +1325,64 @@ body {
     stroke-width: 2;
 }
 
-.research-location {
+.location-group {
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.research-location {
     transition: all 0.3s ease;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-.research-location:hover {
-    fill: var(--accent-color);
-    stroke: var(--primary-color);
+.location-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.location-group:hover .research-location {
+    fill: #7ED321;
+    stroke: #4A90E2;
     stroke-width: 3;
     transform: scale(1.2);
+}
+
+.location-group:hover .location-pulse {
+    animation: pulse-fast 0.5s ease-in-out infinite;
+}
+
+.location-group:hover .location-label {
+    opacity: 1;
+    transform: translateY(-5px);
 }
 
 .location-label {
     font-family: 'Inter', sans-serif;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+    transform: translateY(0);
 }
 
-.research-location:hover + .location-label {
-    opacity: 1;
+@keyframes pulse {
+    0%, 100% {
+        r: 12;
+        opacity: 0.6;
+    }
+    50% {
+        r: 18;
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulse-fast {
+    0%, 100% {
+        r: 12;
+        opacity: 0.8;
+    }
+    50% {
+        r: 20;
+        opacity: 0.3;
+    }
 }
 
 .location-details {
@@ -1415,6 +1451,27 @@ body {
         padding: 1rem;
     }
     
+    .map-svg {
+        height: 300px;
+    }
+    
+    .location-group {
+        transform: scale(1.2);
+    }
+    
+    .research-location {
+        r: 15;
+    }
+    
+    .location-pulse {
+        r: 15;
+    }
+    
+    .location-label {
+        font-size: 11px;
+        opacity: 1;
+    }
+    
     .location-details {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -1424,10 +1481,7 @@ body {
     .location-item {
         padding: 1rem;
     }
-    
-    .location-label {
-        font-size: 10px;
-    }
+}
     
     /* 优化导航菜单在移动端的显示 */
     .nav-menu {

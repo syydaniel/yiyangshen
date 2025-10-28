@@ -663,23 +663,23 @@ function closeEasterEgg() {
 
 // 世界地图交互功能
 function initWorldMap() {
-    const locations = document.querySelectorAll('.research-location');
+    const locationGroups = document.querySelectorAll('.location-group');
     const locationItems = document.querySelectorAll('.location-item');
     
-    // 为每个地图点添加点击事件
-    locations.forEach(location => {
-        location.addEventListener('click', function() {
+    // 为每个地图点组添加点击事件
+    locationGroups.forEach(group => {
+        group.addEventListener('click', function() {
             const locationClass = this.classList[1]; // 获取国家类名
             showLocationDetails(locationClass);
         });
         
         // 添加悬停效果
-        location.addEventListener('mouseenter', function() {
+        group.addEventListener('mouseenter', function() {
             const locationClass = this.classList[1];
             highlightLocationItem(locationClass);
         });
         
-        location.addEventListener('mouseleave', function() {
+        group.addEventListener('mouseleave', function() {
             clearLocationHighlights();
         });
     });
@@ -722,12 +722,22 @@ function highlightLocationItem(locationClass) {
 }
 
 function highlightMapLocation(locationClass) {
-    const mapLocation = document.querySelector(`.research-location.${locationClass}`);
-    if (mapLocation) {
-        mapLocation.style.fill = 'var(--accent-color)';
-        mapLocation.style.stroke = 'var(--primary-color)';
-        mapLocation.style.strokeWidth = '3';
-        mapLocation.style.transform = 'scale(1.2)';
+    const locationGroup = document.querySelector(`.location-group.${locationClass}`);
+    if (locationGroup) {
+        const researchLocation = locationGroup.querySelector('.research-location');
+        const locationLabel = locationGroup.querySelector('.location-label');
+        
+        if (researchLocation) {
+            researchLocation.style.fill = '#7ED321';
+            researchLocation.style.stroke = '#4A90E2';
+            researchLocation.style.strokeWidth = '3';
+            researchLocation.style.transform = 'scale(1.2)';
+        }
+        
+        if (locationLabel) {
+            locationLabel.style.opacity = '1';
+            locationLabel.style.transform = 'translateY(-5px)';
+        }
     }
 }
 
@@ -742,12 +752,22 @@ function clearLocationHighlights() {
 }
 
 function clearMapHighlights() {
-    const mapLocations = document.querySelectorAll('.research-location');
-    mapLocations.forEach(location => {
-        location.style.fill = '#4A90E2';
-        location.style.stroke = '#fff';
-        location.style.strokeWidth = '2';
-        location.style.transform = '';
+    const locationGroups = document.querySelectorAll('.location-group');
+    locationGroups.forEach(group => {
+        const researchLocation = group.querySelector('.research-location');
+        const locationLabel = group.querySelector('.location-label');
+        
+        if (researchLocation) {
+            researchLocation.style.fill = '#4A90E2';
+            researchLocation.style.stroke = '#fff';
+            researchLocation.style.strokeWidth = '2';
+            researchLocation.style.transform = 'scale(1)';
+        }
+        
+        if (locationLabel) {
+            locationLabel.style.opacity = '0';
+            locationLabel.style.transform = 'translateY(0)';
+        }
     });
 }
 
