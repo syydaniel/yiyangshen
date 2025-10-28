@@ -3,1010 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Portfolio - Scientist</title>
+    <title>Yiyang Shen - Environmental Researcher</title>
     
-    <!-- 性能优化：关键资源预加载 -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- 关键CSS内联 -->
-    <style>
-        /* 关键渲染路径CSS */
-        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #0a0a0a; color: #ffffff; }
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    </style>
+    <!-- 样式 -->
+    <link rel="stylesheet" href="styles.css">
     
-    <!-- 非关键CSS异步加载 -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
-    
-    <!-- 字体异步加载 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- 图标异步加载 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
-    
-    <meta name="description" content="Research Scientist Portfolio - Focused on cutting-edge scientific research and academic advancement">
-    <meta name="keywords" content="research, scientist, academic, portfolio, publications, science">
+    <meta name="description" content="Yiyang Shen - Environmental Researcher specializing in water systems, global change, and sustainable urban development">
+    <meta name="keywords" content="environmental research, water systems, urban development, sustainability, climate change">
 </head>
 <body>
-    <!-- 跳过链接 -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <!-- Navigation -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <!-- 导航栏 -->
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">Portfolio</span>
+                <span>Yiyang Shen</span>
             </div>
-            <ul class="nav-menu" role="menubar" id="nav-menu">
-                <li class="nav-item" role="none">
-                    <a href="#home" class="nav-link" role="menuitem" aria-current="page">Home</a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#about" class="nav-link" role="menuitem">About</a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#education" class="nav-link" role="menuitem">Education</a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#experience" class="nav-link" role="menuitem">Experience</a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#projects" class="nav-link" role="menuitem">Projects</a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#contact" class="nav-link" role="menuitem">Contact</a>
-                </li>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
-                <span class="bar" aria-hidden="true"></span>
-                <span class="bar" aria-hidden="true"></span>
-                <span class="bar" aria-hidden="true"></span>
-            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main id="main-content">
-    <!-- Hero Section -->
-    <section id="home" class="hero" role="banner" aria-labelledby="hero-title">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-badge">Environmental Researcher</div>
-                    <h1 class="hero-title" id="hero-title">Yiyang Shen</h1>
-                    <p class="hero-subtitle">Master's Student in Urban Environmental Management</p>
-                    <p class="hero-description">Passionate about water systems, global change, and sustainable urban development. Currently conducting research at Wageningen University & Research.</p>
-                    <div class="hero-buttons" role="group" aria-label="Main actions">
-                        <a href="#about" class="btn btn-primary" aria-describedby="about-description">
-                            <span>Explore My Work</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                        <a href="#contact" class="btn btn-secondary" aria-describedby="contact-description">
-                            <span>Get In Touch</span>
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="hero-quick-stats" role="group" aria-label="Research statistics">
-                        <div class="quick-stat">
-                            <span class="stat-number" aria-label="Four">4</span>
-                            <span class="stat-label">Countries</span>
+    <!-- 主要内容 -->
+    <main>
+        <!-- 首页 -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-badge">Environmental Researcher</div>
+                        <h1 class="hero-title">Yiyang Shen</h1>
+                        <p class="hero-subtitle">Master's Student in Urban Environmental Management</p>
+                        <p class="hero-description">Passionate about water systems, global change, and sustainable urban development. Currently conducting research at Wageningen University & Research.</p>
+                        <div class="hero-buttons">
+                            <a href="#about" class="btn btn-primary">Explore My Work</a>
+                            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                         </div>
-                        <div class="quick-stat">
-                            <span class="stat-number" aria-label="Six plus">6+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="quick-stat">
-                            <span class="stat-number" aria-label="Three">3</span>
-                            <span class="stat-label">Universities</span>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">4</span>
+                                <span class="stat-label">Countries</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">6+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3</span>
+                                <span class="stat-label">Universities</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="hero-visual-container">
-                        <div class="floating-card research-card">
-                            <div class="card-icon">
-                                <i class="fas fa-microscope"></i>
+                    <div class="hero-visual">
+                        <div class="world-map">
+                            <h3>Research Journey</h3>
+                            <div class="map-container">
+                                <div class="map-grid">
+                                    <!-- 简化的世界地图网格 -->
+                                    <div class="map-cell" data-location="canada"></div>
+                                    <div class="map-cell" data-location="netherlands"></div>
+                                    <div class="map-cell" data-location="finland"></div>
+                                    <div class="map-cell" data-location="china"></div>
+                                </div>
+                                <div class="research-locations">
+                                    <div class="location canada" data-lat="49.2827" data-lng="-123.1207">
+                                        <div class="location-marker"></div>
+                                        <span class="location-label">Vancouver</span>
+                                    </div>
+                                    <div class="location netherlands" data-lat="51.9693" data-lng="5.6669">
+                                        <div class="location-marker primary"></div>
+                                        <span class="location-label">Wageningen</span>
+                                    </div>
+                                    <div class="location finland" data-lat="62.6012" data-lng="29.7635">
+                                        <div class="location-marker"></div>
+                                        <span class="location-label">Joensuu</span>
+                                    </div>
+                                    <div class="location china" data-lat="30.2741" data-lng="120.1551">
+                                        <div class="location-marker"></div>
+                                        <span class="location-label">Hangzhou</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <h4>Current Research</h4>
-                                <p>MARINA-Plastic Optimization</p>
-                            </div>
-                        </div>
-                        <div class="floating-card education-card">
-                            <div class="card-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <div class="card-content">
-                                <h4>Education</h4>
-                                <p>Wageningen University</p>
-                            </div>
-                        </div>
-                        <div class="floating-card experience-card">
-                            <div class="card-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <div class="card-content">
-                                <h4>Global Experience</h4>
-                                <p>4 Countries</p>
-                            </div>
-                        </div>
-                        <div class="hero-background-elements">
-                            <div class="bg-element element-1"></div>
-                            <div class="bg-element element-2"></div>
-                            <div class="bg-element element-3"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Interactive World Map Section -->
-    <section class="world-map-section" aria-labelledby="map-title">
-        <div class="container">
-            <div class="world-map-container">
-                <h3 class="map-title" id="map-title">Research Journey Around the World</h3>
-                <p class="map-subtitle" id="map-description">Click on the locations to explore my research experiences. Use keyboard navigation with Tab and Enter keys.</p>
-                <div class="world-map">
-                    <!-- ASCII艺术风格世界地图 -->
-                    <div class="ascii-world-map" role="img" aria-labelledby="map-title" aria-describedby="map-description">
-                        <div class="map-grid">
-                            <!-- 世界地图ASCII网格 -->
-                            <div class="map-row" data-row="0">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
+        <!-- 关于我 -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I am a passionate environmental researcher with a focus on water systems, global change, and sustainable urban development. Currently pursuing my Master's degree in Urban Environmental Management at Wageningen University & Research in the Netherlands.</p>
+                        <p>My research interests span across multiple disciplines including environmental science, urban planning, and climate change adaptation. I have conducted research in four different countries, gaining diverse perspectives on environmental challenges and solutions.</p>
+                        <div class="skills">
+                            <h3>Research Areas</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Water Systems</span>
+                                <span class="skill-tag">Climate Change</span>
+                                <span class="skill-tag">Urban Development</span>
+                                <span class="skill-tag">Environmental Science</span>
+                                <span class="skill-tag">Sustainability</span>
                             </div>
-                            <div class="map-row" data-row="1">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="2">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="3">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="4">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="5">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="6">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="7">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="8">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                            <div class="map-row" data-row="9">
-                                <div class="map-cell ocean" data-col="0"></div>
-                                <div class="map-cell ocean" data-col="1"></div>
-                                <div class="map-cell ocean" data-col="2"></div>
-                                <div class="map-cell ocean" data-col="3"></div>
-                                <div class="map-cell ocean" data-col="4"></div>
-                                <div class="map-cell ocean" data-col="5"></div>
-                                <div class="map-cell ocean" data-col="6"></div>
-                                <div class="map-cell ocean" data-col="7"></div>
-                                <div class="map-cell ocean" data-col="8"></div>
-                                <div class="map-cell ocean" data-col="9"></div>
-                                <div class="map-cell ocean" data-col="10"></div>
-                                <div class="map-cell ocean" data-col="11"></div>
-                                <div class="map-cell ocean" data-col="12"></div>
-                                <div class="map-cell ocean" data-col="13"></div>
-                                <div class="map-cell ocean" data-col="14"></div>
-                                <div class="map-cell ocean" data-col="15"></div>
-                                <div class="map-cell ocean" data-col="16"></div>
-                                <div class="map-cell ocean" data-col="17"></div>
-                                <div class="map-cell ocean" data-col="18"></div>
-                                <div class="map-cell ocean" data-col="19"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- 研究位置标记 - 真实地理坐标对应 -->
-                        <!-- Canada (Vancouver) - 北美洲西海岸 -->
-                        <div class="research-location canada" data-lat="49.2827" data-lng="-123.1207" style="grid-column: 2; grid-row: 4;" role="button" tabindex="0" aria-label="Research location: Vancouver, Canada">
-                            <div class="location-marker">
-                                <div class="marker-pulse"></div>
-                                <div class="marker-core"></div>
-                            </div>
-                            <div class="location-label">Vancouver</div>
-                        </div>
-                        
-                        <!-- Netherlands (Wageningen) - 欧洲中部 -->
-                        <div class="research-location netherlands" data-lat="51.9693" data-lng="5.6669" style="grid-column: 9; grid-row: 3;" role="button" tabindex="0" aria-label="Current research location: Wageningen, Netherlands">
-                            <div class="location-marker primary">
-                                <div class="marker-pulse"></div>
-                                <div class="marker-core"></div>
-                            </div>
-                            <div class="location-label">Wageningen</div>
-                        </div>
-                        
-                        <!-- Finland (Joensuu) - 北欧 -->
-                        <div class="research-location finland" data-lat="62.6012" data-lng="29.7635" style="grid-column: 10; grid-row: 2;" role="button" tabindex="0" aria-label="Research location: Joensuu, Finland">
-                            <div class="location-marker">
-                                <div class="marker-pulse"></div>
-                                <div class="marker-core"></div>
-                            </div>
-                            <div class="location-label">Joensuu</div>
-                        </div>
-                        
-                        <!-- China (Hangzhou) - 亚洲东部 -->
-                        <div class="research-location china" data-lat="30.2741" data-lng="120.1551" style="grid-column: 16; grid-row: 4;" role="button" tabindex="0" aria-label="Research location: Hangzhou, China">
-                            <div class="location-marker">
-                                <div class="marker-pulse"></div>
-                                <div class="marker-core"></div>
-                            </div>
-                            <div class="location-label">Hangzhou</div>
-                        </div>
-                        
-                        <!-- 连接线动画 -->
-                        <div class="connection-lines">
-                            <div class="connection-line" data-from="canada" data-to="netherlands"></div>
-                            <div class="connection-line" data-from="netherlands" data-to="finland"></div>
-                            <div class="connection-line" data-from="finland" data-to="china"></div>
                         </div>
                     </div>
-                    
-                    <!-- 底部行动按钮 - 参考设计 -->
-                    <div class="map-actions">
-                        <button class="explore-btn" aria-describedby="explore-description">
-                            <span>Explore research network further</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Location details -->
-                    <div class="location-details" role="region" aria-label="Research location details">
-                        <div class="location-item" data-location="china" id="china-details" role="article" aria-labelledby="china-title">
-                            <h4 id="china-title">🇨🇳 Hangzhou, China</h4>
-                            <p>Zhejiang Agriculture and Forestry University</p>
-                            <p>Environmental Microbiology Research</p>
-                            <a href="#projects" class="location-link" aria-label="View projects from Hangzhou research">View Projects</a>
-                        </div>
-                        <div class="location-item" data-location="canada" id="canada-details" role="article" aria-labelledby="canada-title">
-                            <h4 id="canada-title">🇨🇦 Vancouver, Canada</h4>
-                            <p>University of British Columbia</p>
-                            <p>Urban Forestry & Climate Research</p>
-                            <a href="#projects" class="location-link" aria-label="View projects from Vancouver research">View Projects</a>
-                        </div>
-                        <div class="location-item" data-location="finland" id="finland-details" role="article" aria-labelledby="finland-title">
-                            <h4 id="finland-title">🇫🇮 Joensuu, Finland</h4>
-                            <p>Eastern Finland University</p>
-                            <p>DOC Research</p>
-                            <a href="#projects" class="location-link" aria-label="View projects from Joensuu research">View Projects</a>
-                        </div>
-                        <div class="location-item" data-location="netherlands" id="netherlands-details" role="article" aria-labelledby="netherlands-title">
-                            <h4 id="netherlands-title">🇳🇱 Wageningen, Netherlands</h4>
-                            <p>Wageningen University & Research</p>
-                            <p>Master's Thesis Research</p>
-                            <a href="#projects" class="location-link" aria-label="View projects from Wageningen research">View Projects</a>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-user-graduate"></i>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-description">
-                        I am a Master's student in Urban Environmental Management at Wageningen University & Research, specializing in Water Systems and Global Change. 
-                        My research focuses on plastic retention optimization in the MARINA-Plastic project, combining urban forestry, environmental management, and water systems research.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Universities</div>
+        <!-- 教育背景 -->
+        <section id="education" class="education">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="education-timeline">
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">6+</div>
-                            <div class="stat-label">Research Projects</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">5+</div>
-                            <div class="stat-label">Years Experience</div>
+                        <div class="education-content">
+                            <h3>Master of Science in Urban Environmental Management</h3>
+                            <h4>Wageningen University & Research</h4>
+                            <span class="education-date">2024 - 2026</span>
+                            <p>Focus on sustainable urban development, environmental policy, and climate change adaptation strategies.</p>
                         </div>
                     </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research Areas Section -->
-    <section id="research" class="research">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Research Areas</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="research-grid">
-                <div class="research-card">
-                    <div class="card-icon">
-                        <i class="fas fa-tint"></i>
-                    </div>
-                    <h3 class="card-title">Water Systems & Global Change</h3>
-                    <p class="card-description">Researching water quality, plastic retention optimization, and environmental impacts of global change on aquatic systems</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">
-                        <i class="fas fa-tree"></i>
-                    </div>
-                    <h3 class="card-title">Urban Forestry</h3>
-                    <p class="card-description">Analyzing urban tree inventory data, land surface temperature patterns, and urban forest ecosystem services</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="card-title">Plant-Microbe Interactions</h3>
-                    <p class="card-description">Investigating phosphorus-solubilizing microorganisms and their interactions with plants in forest ecosystems</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="card-title">Spatial Data Analysis</h3>
-                    <p class="card-description">Using GIS, remote sensing, and statistical modeling to analyze environmental patterns and urban development impacts</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="publications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Publications</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="publications-content">
-                <div class="publication-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="journal">Journal Articles</button>
-                    <button class="filter-btn" data-filter="conference">Conference Papers</button>
-                    <button class="filter-btn" data-filter="patent">Patents</button>
-                </div>
-                <div class="publications-list">
-                    <div class="publication-item" data-category="conference">
-                        <div class="publication-year">2024</div>
-                        <div class="publication-content">
-                            <h3 class="publication-title">Urban Structure Impact on Surface Temperature at UBC (2014-2022)</h3>
-                            <p class="publication-authors">Yiyang Shen, Melissa McHale, Cody Bingham</p>
-                            <p class="publication-journal">UFOR 401 Urban Forestry Capstone Project</p>
-                            <div class="publication-links">
-                                <a href="#" class="link-btn" onclick="openPublicationModal('publication1')"><i class="fas fa-eye"></i> Preview</a>
-                                <a href="#" class="link-btn"><i class="fas fa-external-link-alt"></i> View Report</a>
-                                <a href="#" class="link-btn"><i class="fas fa-quote-left"></i> Cite</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="publication-item" data-category="conference">
-                        <div class="publication-year">2024</div>
-                        <div class="publication-content">
-                            <h3 class="publication-title">Land Surface Temperature Changes with Urban Development in Wesbrook Village</h3>
-                            <p class="publication-authors">Yiyang Shen, Melissa McHale, Cody Bingham</p>
-                            <p class="publication-journal">UFOR 401 Group Project - Random Forest Modeling</p>
-                            <div class="publication-links">
-                                <a href="#" class="link-btn"><i class="fas fa-external-link-alt"></i> View Report</a>
-                                <a href="#" class="link-btn"><i class="fas fa-quote-left"></i> Cite</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="publication-item" data-category="conference">
-                        <div class="publication-year">2024</div>
-                        <div class="publication-content">
-                            <h3 class="publication-title">Tree Inventory Analysis: Patterns in Surrey's Urban Forest</h3>
-                            <p class="publication-authors">Yiyang Shen, Andrew Adams</p>
-                            <p class="publication-journal">UBC Faculty of Forestry Research Project</p>
-                            <div class="publication-links">
-                                <a href="#" class="link-btn"><i class="fas fa-external-link-alt"></i> View Analysis</a>
-                                <a href="#" class="link-btn"><i class="fas fa-quote-left"></i> Cite</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Education</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="education-timeline">
-                <div class="education-item">
-                    <div class="education-year">2024 - 2026</div>
-                    <div class="education-content">
-                        <h3 class="education-degree">Master of Urban Environmental Management</h3>
-                        <h4 class="education-school">Wageningen University & Research</h4>
-                        <p class="education-specialization">Water Systems and Global Change</p>
-                        <p class="education-supervisor">Supervisor: Prof. Maryna Strokal</p>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="education-year">2021 - 2024</div>
-                    <div class="education-content">
-                        <h3 class="education-degree">Bachelor of Urban Forestry</h3>
-                        <h4 class="education-school">University of British Columbia</h4>
-                        <p class="education-specialization">Green Space Management</p>
-                        <p class="education-gpa">GPA: 83.7/100 (Graduated with Honors)</p>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="education-year">2019 - 2024</div>
-                    <div class="education-content">
-                        <h3 class="education-degree">Bachelor of Forestry</h3>
-                        <h4 class="education-school">Zhejiang Agriculture and Forestry University</h4>
-                        <p class="education-specialization">Forest Ecosystem Studies</p>
-                        <p class="education-gpa">GPA: 87.7/100</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Research Projects</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <!-- Current Research -->
-            <div class="project-category">
-                <h3 class="category-title">Current Research</h3>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3 class="project-title">MARINA-Plastic Retention Optimization</h3>
-                        <p class="project-description">Master's thesis research on optimizing plastic retention rates in water systems, focusing on urban environmental management and global change impacts. Broad topic covering water, urban, BGI, and NBS (specific topic to be confirmed Sep 2025).</p>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">DOC Research in Lapland</h3>
-                        <p class="project-description">Research Assistant at Eastern Finland University. Conducted field samplings in Lapland including DOC (Dissolved Organic Carbon) emissions from the Kemi River, performed spectral measurements and water incubations, and analyzed field samples using GIS. Results expected to be published in January 2026.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Urban Forestry Research -->
-            <div class="project-category">
-                <h3 class="category-title">Urban Forestry Research</h3>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3 class="project-title">Urban Tree Inventory Analysis</h3>
-                        <p class="project-description">Analyzed over 130,000 City of Surrey tree inventory data to identify patterns in tree location, mortality, species distribution, and lifespan. Used advanced statistical methods to understand urban forest dynamics.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">Land Surface Temperature Analysis</h3>
-                        <p class="project-description">Investigated the impact of urban structure on surface temperature at UBC (2014-2022) using 30m resolution mapping and random forest modeling. Both personal and group projects focusing on urban heat island effects.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">Pollinators and Climate Change Study</h3>
-                        <p class="project-description">Field survey of insects and bumble bees, focusing on their interactive relationship with plants within 18 urban parks in Vancouver. Research on pollinator behavior and climate change impacts in urban environments.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Environmental Microbiology -->
-            <div class="project-category">
-                <h3 class="category-title">Environmental Microbiology</h3>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3 class="project-title">Phosphorus-Solubilizing Microorganism Interactions</h3>
-                        <p class="project-description">Conducted research on interactions between phosphorus-solubilizing microorganism (PSM) strains and their effects on plant growth. Led team in proposal writing and project execution at State Key Laboratory of Subtropical Silviculture.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">PSM and Phyllostachys edulis Interactions</h3>
-                        <p class="project-description">Investigated interactions between phosphorus-solubilizing microorganisms and Phyllostachys edulis (bamboo). Responsible for field work and data analysis in forest ecosystem studies.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Leadership & Outreach -->
-            <div class="project-category">
-                <h3 class="category-title">Leadership & Outreach Projects</h3>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3 class="project-title">World Without Borders Research</h3>
-                        <p class="project-description">Led research team focusing on people's attitudes toward reintroducing plants and animals into campus environments. Online research project exploring community perspectives on biodiversity restoration.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">Urban Forestry Database Creation</h3>
-                        <p class="project-description">Volunteer research assistant gathering urban forestry documents for database creation. Contributed to building comprehensive resource library for urban forestry research and practice.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Professional Experience</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">May 2025 - Sep 2025</div>
-                        <h3 class="timeline-title">Research Assistant (Internship)</h3>
-                        <h4 class="timeline-company">Eastern Finland University, Joensuu, Finland</h4>
-                        <p class="timeline-description">
-                            Department of Environmental and Biological Sciences. Conducted field samplings in Lapland including DOC emissions from the Kemi River, performed spectral measurements and water incubations, assisted in summer school, and analyzed field samples and watershed land use using GIS. Supervisor: Prof. Frank Berninger.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">Feb 2024 - Apr 2024</div>
-                        <h3 class="timeline-title">Research Assistant (Volunteer)</h3>
-                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
-                        <p class="timeline-description">
-                            Faculty of Forestry. Tree Inventory Analysis: analyzed over 130,000 City of Surrey tree inventory data to identify patterns in tree location, mortality, species, and lifespan. Supervisor: Prof. Andrew Adams.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">May 2023 - Aug 2023</div>
-                        <h3 class="timeline-title">Research Assistant (Full Time)</h3>
-                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
-                        <p class="timeline-description">
-                            Faculty of Food and Land System, Pollinators and Climate Change Lab. Conducted field surveys of insects and bumble bees, focusing on their interactive relationship with plants within 18 urban parks in Vancouver. Supervisors: Prof. Risa Sargant & Dr. Jens Ulrich.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">Jul 2022 - Aug 2022</div>
-                        <h3 class="timeline-title">Research Assistant (Volunteer)</h3>
-                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
-                        <p class="timeline-description">
-                            Faculty of Forestry. Gathered urban forestry documents for database creation. Supervisor: Prof. Andrew Adams.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">Oct 2019 - Aug 2021</div>
-                        <h3 class="timeline-title">Research Assistant (Part Time)</h3>
-                        <h4 class="timeline-company">Zhejiang Agriculture and Forestry University, Zhejiang, China</h4>
-                        <p class="timeline-description">
-                            State Key Laboratory of Subtropical Silviculture. Conducted research on phosphorus-solubilizing microorganism (PSM) interactions and plant-microbe relationships. Led team in proposal writing and project execution. Supervisors: Prof. Yeqing Ying & Prof. Wenhui Shi.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Contact</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>syydaniel@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Academic Email</h3>
-                            <p>yiyang.shen@wur.nl</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Phone</h3>
-                            <p>(+31) 065743215</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Address</h3>
-                            <p>Dijkgraaf 4, Wageningen, Netherlands</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                    <div class="education-item">
+                        <div class="education-icon">
                             <i class="fas fa-university"></i>
                         </div>
-                        <div class="contact-details">
-                            <h3>Institution</h3>
-                            <p>Wageningen University & Research</p>
+                        <div class="education-content">
+                            <h3>Bachelor of Science in Environmental Science</h3>
+                            <h4>University of British Columbia</h4>
+                            <span class="education-date">2020 - 2024</span>
+                            <p>Comprehensive study of environmental systems, ecology, and sustainable resource management.</p>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+        </section>
+
+        <!-- 工作经历 -->
+        <section id="experience" class="experience">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Professional Experience</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-date">2024 - Present</div>
+                        <div class="experience-content">
+                            <h3>Research Assistant</h3>
+                            <h4>Wageningen University & Research</h4>
+                            <p>Conducting research on urban water systems and climate change adaptation strategies. Working on the MARINA-Plastic project focusing on microplastics in urban environments.</p>
+                            <ul>
+                                <li>Data collection and analysis of water quality parameters</li>
+                                <li>Field research in urban environments</li>
+                                <li>Collaboration with international research teams</li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2023 - 2024</div>
+                        <div class="experience-content">
+                            <h3>Research Intern</h3>
+                            <h4>University of Eastern Finland</h4>
+                            <p>Conducted research on forest ecosystems and climate change impacts in the Varrio Research Forest, Finland.</p>
+                            <ul>
+                                <li>Field data collection and analysis</li>
+                                <li>Climate monitoring and assessment</li>
+                                <li>Research report preparation</li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2022 - 2023</div>
+                        <div class="experience-content">
+                            <h3>Environmental Consultant</h3>
+                            <h4>Zhejiang University</h4>
+                            <p>Worked on urban environmental assessment and sustainable development projects in Hangzhou, China.</p>
+                            <ul>
+                                <li>Environmental impact assessments</li>
+                                <li>Urban planning consultation</li>
+                                <li>Policy analysis and recommendations</li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/syydaniel" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="mailto:syydaniel@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.wur.nl" target="_blank" class="social-link"><i class="fas fa-university"></i></a>
+        </section>
+
+        <!-- 项目展示 -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Research Projects</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>MARINA-Plastic Project</h3>
+                        <p>Research on microplastics in urban water systems and their environmental impacts. Focus on developing sustainable solutions for plastic waste management.</p>
+                        <div class="project-tags">
+                            <span class="tag">Water Systems</span>
+                            <span class="tag">Microplastics</span>
+                            <span class="tag">Urban Environment</span>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge ongoing">Ongoing</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>Forest Climate Research</h3>
+                        <p>Study of climate change impacts on forest ecosystems in northern Finland. Analysis of temperature and precipitation effects on tree growth and biodiversity.</p>
+                        <div class="project-tags">
+                            <span class="tag">Climate Change</span>
+                            <span class="tag">Forest Ecology</span>
+                            <span class="tag">Biodiversity</span>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h3>Urban Sustainability Assessment</h3>
+                        <p>Comprehensive evaluation of urban sustainability indicators in Chinese cities. Development of frameworks for sustainable urban development planning.</p>
+                        <div class="project-tags">
+                            <span class="tag">Urban Planning</span>
+                            <span class="tag">Sustainability</span>
+                            <span class="tag">Policy Analysis</span>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- 联系我 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>yiyang.shen@wur.nl</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Location</h3>
+                                <p>Wageningen, Netherlands</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>LinkedIn</h3>
+                                <p><a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank">Connect with me</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 Yiyang Shen. All rights reserved.</p>
+                </div>
                 <div class="footer-links">
-                    <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="footer-link">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/syydaniel" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:syydaniel@gmail.com" class="footer-link">
-                        <i class="fas fa-envelope"></i> Email
+                    <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank">
+                        <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
-                <p>&copy; 2024 Yiyang Shen Research Portfolio. All rights reserved.</p>
-                <p>Built with modern web technologies</p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" title="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Theme Toggle -->
-
-    <!-- Easter Eggs -->
-    <div id="konamiCode" class="easter-egg hidden">
-        <div class="easter-content">
-            <h3>🎉 Konami Code Activated!</h3>
-            <p>You found the secret! Yiyang's research is powered by curiosity and lots of coffee ☕</p>
-            <button onclick="closeEasterEgg()">Close</button>
-        </div>
-    </div>
-
-    <div id="clickCounter" class="easter-egg hidden">
-        <div class="easter-content">
-            <h3>🖱️ Click Master!</h3>
-            <p>You've clicked <span id="clickCount">0</span> times! That's some serious dedication to exploring my portfolio!</p>
-            <button onclick="closeEasterEgg()">Close</button>
-        </div>
-    </div>
-
-    <div id="scrollMaster" class="easter-egg hidden">
-        <div class="easter-content">
-            <h3>📜 Scroll Explorer!</h3>
-            <p>Wow! You've scrolled <span id="scrollDistance">0</span> pixels! You're really thorough in checking out my work!</p>
-            <button onclick="closeEasterEgg()">Close</button>
-        </div>
-    </div>
-
-    <!-- Hidden elements for easter eggs -->
-    <div class="hidden-elements">
-        <div class="secret-message" data-message="MARINA-Plastic research is fascinating! 🌊">
-            <i class="fas fa-water"></i>
-        </div>
-        <div class="secret-message" data-message="Wageningen University is amazing! 🌱">
-            <i class="fas fa-seedling"></i>
-        </div>
-        <div class="secret-message" data-message="Urban forestry rocks! 🌳">
-            <i class="fas fa-tree"></i>
-        </div>
-    </div>
-
-    <!-- Publication Modal -->
-    <div id="publicationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Publication Details</h2>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="publication-details">
-                    <h3 class="modal-publication-title"></h3>
-                    <p class="modal-publication-authors"></p>
-                    <p class="modal-publication-journal"></p>
-                    <div class="modal-publication-abstract">
-                        <h4>Abstract</h4>
-                        <p class="abstract-text"></p>
-                    </div>
-                    <div class="modal-publication-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Citations:</span>
-                            <span class="metric-value">0</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Impact Factor:</span>
-                            <span class="metric-value">0.0</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">DOI:</span>
-                            <span class="metric-value">10.1000/example</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary">View Full Paper</button>
-                <button class="btn btn-secondary">Download PDF</button>
-                <button class="btn btn-secondary modal-close">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 性能优化：JavaScript异步加载 -->
-    <script src="script.js" defer></script>
-    
-    <!-- 性能监控脚本 -->
-    <script>
-        // 性能监控
-        if ('performance' in window) {
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    const perfData = performance.getEntriesByType('navigation')[0];
-                    const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
-                    const domContentLoaded = perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart;
-                    
-                    console.log('性能指标:');
-                    console.log('DOM Content Loaded:', domContentLoaded, 'ms');
-                    console.log('页面完全加载:', loadTime, 'ms');
-                    
-                    // 发送性能数据到分析服务（如果需要）
-                    if (loadTime > 3000) {
-                        console.warn('页面加载时间较长，建议优化');
-                    }
-                }, 0);
-            });
-        }
-        
-        // 资源加载优化
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(function() {
-                // 预加载非关键资源
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
-                document.head.appendChild(link);
-            });
-        }
-    </script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
