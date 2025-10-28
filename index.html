@@ -28,10 +28,10 @@
                     <a href="#education" class="nav-link">Education</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#experience" class="nav-link">Experience</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
                     <a href="#publications" class="nav-link">Publications</a>
@@ -106,6 +106,78 @@
                         <div class="stat-bubble">
                             <span class="stat-number">6+</span>
                             <span class="stat-label">Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive World Map Section -->
+    <section class="world-map-section">
+        <div class="container">
+            <div class="world-map-container">
+                <h3 class="map-title">Research Journey Around the World</h3>
+                <p class="map-subtitle">Click on the locations to explore my research experiences</p>
+                <div class="world-map">
+                    <svg viewBox="0 0 1000 500" class="map-svg">
+                        <!-- Simplified world map paths -->
+                        <path class="continent" d="M150,200 L300,180 L350,220 L320,280 L200,300 L150,250 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                        <path class="continent" d="M100,300 L250,280 L300,320 L280,380 L150,400 L100,350 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                        <path class="continent" d="M400,150 L600,140 L650,180 L620,240 L500,260 L400,200 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                        <path class="continent" d="M700,200 L900,190 L950,230 L920,290 L800,310 L700,250 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                        
+                        <!-- Research locations -->
+                        <!-- China (Hangzhou) -->
+                        <circle class="research-location china" cx="750" cy="280" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                            <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text class="location-label" x="750" y="300" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Hangzhou, China</text>
+                        
+                        <!-- Canada (Vancouver) -->
+                        <circle class="research-location canada" cx="200" cy="180" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                            <animate attributeName="r" values="8;12;8" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <text class="location-label" x="200" y="200" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Vancouver, Canada</text>
+                        
+                        <!-- Finland (Joensuu) -->
+                        <circle class="research-location finland" cx="500" cy="120" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                            <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <text class="location-label" x="500" y="140" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Joensuu, Finland</text>
+                        
+                        <!-- Netherlands (Wageningen) -->
+                        <circle class="research-location netherlands" cx="480" cy="180" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2">
+                            <animate attributeName="r" values="8;12;8" dur="2.2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text class="location-label" x="480" y="200" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Wageningen, Netherlands</text>
+                    </svg>
+                    
+                    <!-- Location details -->
+                    <div class="location-details">
+                        <div class="location-item" data-location="china">
+                            <h4>🇨🇳 Hangzhou, China</h4>
+                            <p>Zhejiang Agriculture and Forestry University</p>
+                            <p>Environmental Microbiology Research</p>
+                            <a href="#projects" class="location-link">View Projects</a>
+                        </div>
+                        <div class="location-item" data-location="canada">
+                            <h4>🇨🇦 Vancouver, Canada</h4>
+                            <p>University of British Columbia</p>
+                            <p>Urban Forestry & Climate Research</p>
+                            <a href="#projects" class="location-link">View Projects</a>
+                        </div>
+                        <div class="location-item" data-location="finland">
+                        <h4>🇫🇮 Joensuu, Finland</h4>
+                        <p>Eastern Finland University</p>
+                        <p>DOC Research</p>
+                            <a href="#projects" class="location-link">View Projects</a>
+                        </div>
+                        <div class="location-item" data-location="netherlands">
+                            <h4>🇳🇱 Wageningen, Netherlands</h4>
+                            <p>Wageningen University & Research</p>
+                            <p>Master's Thesis Research</p>
+                            <a href="#projects" class="location-link">View Projects</a>
                         </div>
                     </div>
                 </div>
@@ -303,8 +375,8 @@
                         <p class="project-description">Master's thesis research on optimizing plastic retention rates in water systems, focusing on urban environmental management and global change impacts. Broad topic covering water, urban, BGI, and NBS (specific topic to be confirmed Sep 2025).</p>
                     </div>
                     <div class="project-card">
-                        <h3 class="project-title">VOC Emissions Research in Lapland</h3>
-                        <p class="project-description">Research Assistant at Eastern Finland University. Conducted field samplings in Lapland including VOC emissions from the Kemi River, performed spectral measurements and water incubations, and analyzed field samples using GIS. Results expected to be published in January 2026.</p>
+                        <h3 class="project-title">DOC Research in Lapland</h3>
+                        <p class="project-description">Research Assistant at Eastern Finland University. Conducted field samplings in Lapland including DOC (Dissolved Organic Carbon) emissions from the Kemi River, performed spectral measurements and water incubations, and analyzed field samples using GIS. Results expected to be published in January 2026.</p>
                     </div>
                 </div>
             </div>
@@ -364,43 +436,62 @@
     <section id="experience" class="experience">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Experience</h2>
+                <h2 class="section-title">Professional Experience</h2>
                 <div class="section-line"></div>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-year">2024 - 2026</div>
-                        <h3 class="timeline-title">Master's Student</h3>
-                        <h4 class="timeline-company">Wageningen University & Research</h4>
+                        <div class="timeline-year">May 2025 - Sep 2025</div>
+                        <h3 class="timeline-title">Research Assistant (Internship)</h3>
+                        <h4 class="timeline-company">Eastern Finland University, Joensuu, Finland</h4>
                         <p class="timeline-description">
-                            Master of Urban Environmental Management (Water Systems and Global Change).
-                            Conducting thesis research on MARINA-Plastic retention optimization under Prof. Maryna Strokal.
+                            Department of Environmental and Biological Sciences. Conducted field samplings in Lapland including DOC emissions from the Kemi River, performed spectral measurements and water incubations, assisted in summer school, and analyzed field samples and watershed land use using GIS. Supervisor: Prof. Frank Berninger.
                         </p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-year">2021 - 2024</div>
-                        <h3 class="timeline-title">Bachelor's Student</h3>
-                        <h4 class="timeline-company">University of British Columbia</h4>
+                        <div class="timeline-year">Feb 2024 - Apr 2024</div>
+                        <h3 class="timeline-title">Research Assistant (Volunteer)</h3>
+                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
                         <p class="timeline-description">
-                            Bachelor of Urban Forestry (Green Space Management). Graduated with Honors (83.7/100).
-                            Conducted multiple research projects in urban forestry, tree inventory analysis, and land surface temperature studies.
+                            Faculty of Forestry. Tree Inventory Analysis: analyzed over 130,000 City of Surrey tree inventory data to identify patterns in tree location, mortality, species, and lifespan. Supervisor: Prof. Andrew Adams.
                         </p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-year">2019 - 2024</div>
-                        <h3 class="timeline-title">Bachelor's Student</h3>
-                        <h4 class="timeline-company">Zhejiang Agriculture and Forestry University</h4>
+                        <div class="timeline-year">May 2023 - Aug 2023</div>
+                        <h3 class="timeline-title">Research Assistant (Full Time)</h3>
+                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
                         <p class="timeline-description">
-                            Bachelor of Forestry. Conducted research on plant-microbe interactions,
-                            phosphorus-solubilizing microorganisms, and forest ecosystem studies. Graduated with 87.7/100.
+                            Faculty of Food and Land System, Pollinators and Climate Change Lab. Conducted field surveys of insects and bumble bees, focusing on their interactive relationship with plants within 18 urban parks in Vancouver. Supervisors: Prof. Risa Sargant & Dr. Jens Ulrich.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Jul 2022 - Aug 2022</div>
+                        <h3 class="timeline-title">Research Assistant (Volunteer)</h3>
+                        <h4 class="timeline-company">University of British Columbia, Vancouver, Canada</h4>
+                        <p class="timeline-description">
+                            Faculty of Forestry. Gathered urban forestry documents for database creation. Supervisor: Prof. Andrew Adams.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Oct 2019 - Aug 2021</div>
+                        <h3 class="timeline-title">Research Assistant (Part Time)</h3>
+                        <h4 class="timeline-company">Zhejiang Agriculture and Forestry University, Zhejiang, China</h4>
+                        <p class="timeline-description">
+                            State Key Laboratory of Subtropical Silviculture. Conducted research on phosphorus-solubilizing microorganism (PSM) interactions and plant-microbe relationships. Led team in proposal writing and project execution. Supervisors: Prof. Yeqing Ying & Prof. Wenhui Shi.
                         </p>
                     </div>
                 </div>
@@ -427,7 +518,7 @@
                         </div>
                         <div class="status-item">
                             <span class="status-icon">🔬</span>
-                            <span class="status-text">VOC Emissions Research (Expected Jan 2026)</span>
+                            <span class="status-text">DOC Research (Expected Jan 2026)</span>
                         </div>
                         <div class="status-item">
                             <span class="status-icon">🌳</span>

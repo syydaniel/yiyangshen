@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSearch();
     initBackToTop();
     initThemeToggle();
+    initWorldMap();
     initModal();
     initEasterEggs();
 });
@@ -655,6 +656,141 @@ function closeEasterEgg() {
         egg.classList.add('hidden');
     });
     document.body.style.overflow = 'auto';
+}
+
+// 世界地图交互功能
+function initWorldMap() {
+    const locations = document.querySelectorAll('.research-location');
+    const locationItems = document.querySelectorAll('.location-item');
+    
+    // 为每个地图点添加点击事件
+    locations.forEach(location => {
+        location.addEventListener('click', function() {
+            const locationClass = this.classList[1]; // 获取国家类名
+            showLocationDetails(locationClass);
+        });
+        
+        // 添加悬停效果
+        location.addEventListener('mouseenter', function() {
+            const locationClass = this.classList[1];
+            highlightLocationItem(locationClass);
+        });
+        
+        location.addEventListener('mouseleave', function() {
+            clearLocationHighlights();
+        });
+    });
+    
+    // 为每个位置详情卡片添加悬停效果
+    locationItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const locationClass = this.dataset.location;
+            highlightMapLocation(locationClass);
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            clearMapHighlights();
+        });
+    });
+}
+
+function showLocationDetails(locationClass) {
+    // 滚动到项目部分
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+        projectsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+    
+    // 根据国家筛选项目（如果需要的话）
+    filterProjectsByLocation(locationClass);
+}
+
+function highlightLocationItem(locationClass) {
+    const locationItem = document.querySelector(`[data-location="${locationClass}"]`);
+    if (locationItem) {
+        locationItem.style.transform = 'translateY(-5px)';
+        locationItem.style.background = 'var(--card-bg)';
+        locationItem.style.borderColor = 'var(--primary-color)';
+        locationItem.style.boxShadow = 'var(--shadow-hover)';
+    }
+}
+
+function highlightMapLocation(locationClass) {
+    const mapLocation = document.querySelector(`.research-location.${locationClass}`);
+    if (mapLocation) {
+        mapLocation.style.fill = 'var(--accent-color)';
+        mapLocation.style.stroke = 'var(--primary-color)';
+        mapLocation.style.strokeWidth = '3';
+        mapLocation.style.transform = 'scale(1.2)';
+    }
+}
+
+function clearLocationHighlights() {
+    const locationItems = document.querySelectorAll('.location-item');
+    locationItems.forEach(item => {
+        item.style.transform = '';
+        item.style.background = '';
+        item.style.borderColor = '';
+        item.style.boxShadow = '';
+    });
+}
+
+function clearMapHighlights() {
+    const mapLocations = document.querySelectorAll('.research-location');
+    mapLocations.forEach(location => {
+        location.style.fill = '#4A90E2';
+        location.style.stroke = '#fff';
+        location.style.strokeWidth = '2';
+        location.style.transform = '';
+    });
+}
+
+function filterProjectsByLocation(locationClass) {
+    // 根据国家筛选项目
+    const projectCategories = document.querySelectorAll('.project-category');
+    
+    projectCategories.forEach(category => {
+        const projects = category.querySelectorAll('.project-card');
+        projects.forEach(project => {
+            const description = project.querySelector('.project-description').textContent.toLowerCase();
+            let shouldShow = false;
+            
+            switch(locationClass) {
+                case 'china':
+                    shouldShow = description.includes('zhejiang') || description.includes('china') || description.includes('microorganism');
+                    break;
+                case 'canada':
+                    shouldShow = description.includes('ubc') || description.includes('vancouver') || description.includes('canada') || description.includes('surrey');
+                    break;
+                case 'finland':
+                    shouldShow = description.includes('finland') || description.includes('lapland') || description.includes('kemi') || description.includes('doc');
+                    break;
+                case 'netherlands':
+                    shouldShow = description.includes('wageningen') || description.includes('wur') || description.includes('marina') || description.includes('plastic');
+                    break;
+            }
+            
+            if (shouldShow) {
+                project.style.opacity = '1';
+                project.style.transform = 'scale(1)';
+            } else {
+                project.style.opacity = '0.3';
+                project.style.transform = 'scale(0.95)';
+            }
+        });
+    });
+    
+    // 3秒后恢复所有项目
+    setTimeout(() => {
+        const allProjects = document.querySelectorAll('.project-card');
+        allProjects.forEach(project => {
+            project.style.opacity = '1';
+            project.style.transform = 'scale(1)';
+        });
+    }, 3000);
 }
 
 // 全局函数

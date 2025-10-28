@@ -1003,6 +1003,264 @@ body {
     border: 3px solid var(--border-color);
 }
 
+/* 世界地图部分 */
+.world-map-section {
+    padding: 5rem 0;
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.world-map-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(74, 144, 226, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.world-map-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.map-title {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.map-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.world-map {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+.map-svg {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+.continent {
+    transition: all 0.3s ease;
+}
+
+.continent:hover {
+    fill: rgba(74, 144, 226, 0.1);
+    stroke: var(--primary-color);
+    stroke-width: 2;
+}
+
+.research-location {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.research-location:hover {
+    fill: var(--accent-color);
+    stroke: var(--primary-color);
+    stroke-width: 3;
+    transform: scale(1.2);
+}
+
+.location-label {
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.research-location:hover + .location-label {
+    opacity: 1;
+}
+
+.location-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.location-item {
+    background: rgba(30, 30, 30, 0.5);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    text-align: left;
+}
+
+.location-item:hover {
+    background: var(--card-bg);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-color);
+}
+
+.location-item h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.location-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+}
+
+.location-link {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    transition: var(--transition);
+}
+
+.location-link:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+}
+
+@media (max-width: 768px) {
+    .map-title {
+        font-size: 2rem;
+    }
+    
+    .world-map {
+        padding: 1rem;
+    }
+    
+    .location-details {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .location-item {
+        padding: 1rem;
+    }
+    
+    .location-label {
+        font-size: 10px;
+    }
+    
+    /* 优化导航菜单在移动端的显示 */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: rgba(5, 5, 5, 0.98);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        padding: 2rem 0;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid rgba(74, 144, 226, 0.2);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+    
+    .nav-link {
+        padding: 1rem 2rem;
+        display: block;
+        font-size: 1.1rem;
+    }
+    
+    /* 优化项目分类在移动端的显示 */
+    .project-category {
+        margin-bottom: 3rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* 优化时间线在移动端的显示 */
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        margin-left: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .timeline-marker {
+        left: -25px;
+        width: 10px;
+        height: 10px;
+    }
+    
+    .timeline-year {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-title {
+        font-size: 1.1rem;
+    }
+    
+    .timeline-company {
+        font-size: 0.9rem;
+    }
+    
+    .timeline-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
 /* 教育部分 */
 .education {
     padding: 5rem 0;
