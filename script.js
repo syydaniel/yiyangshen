@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initWorldMap();
     initModal();
     initEasterEggs();
+    initAdvancedInteractions();
+    initScrollAnimations();
+    initLoadingStates();
 });
 
 // 导航栏功能
@@ -792,6 +795,176 @@ function filterProjectsByLocation(locationClass) {
         });
     }, 3000);
 }
+
+// 高级交互功能
+function initAdvancedInteractions() {
+    // 为所有卡片添加悬停效果
+    const cards = document.querySelectorAll('.project-card, .education-item, .timeline-item, .location-item');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.boxShadow = 'var(--shadow-hover)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = 'var(--shadow-light)';
+        });
+    });
+    
+    // 为按钮添加点击波纹效果
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+    
+    // 为浮动卡片添加点击交互
+    const floatingCards = document.querySelectorAll('.floating-card');
+    floatingCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const cardType = this.classList[1].replace('-card', '');
+            scrollToSection(cardType);
+        });
+    });
+}
+
+// 滚动动画
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // 观察所有需要动画的元素
+    const animatedElements = document.querySelectorAll('.section-header, .project-card, .education-item, .timeline-item, .location-item');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// 加载状态
+function initLoadingStates() {
+    // 页面加载完成后的动画
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // 为hero元素添加延迟动画
+        const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .hero-subtitle, .hero-description, .hero-buttons, .hero-quick-stats');
+        heroElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    });
+}
+
+// 滚动到指定部分
+function scrollToSection(sectionType) {
+    let targetSection;
+    
+    switch(sectionType) {
+        case 'research':
+            targetSection = document.getElementById('projects');
+            break;
+        case 'education':
+            targetSection = document.getElementById('education');
+            break;
+        case 'experience':
+            targetSection = document.getElementById('experience');
+            break;
+        default:
+            targetSection = document.getElementById('about');
+    }
+    
+    if (targetSection) {
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// 添加CSS动画类
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .animate-in {
+        animation: slideInUp 0.6s ease-out forwards;
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .loaded .hero-badge,
+    .loaded .hero-title,
+    .loaded .hero-subtitle,
+    .loaded .hero-description,
+    .loaded .hero-buttons,
+    .loaded .hero-quick-stats {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+    }
+    
+    .floating-card {
+        cursor: pointer;
+    }
+    
+    .floating-card:hover {
+        animation-play-state: paused;
+    }
+`;
+document.head.appendChild(style);
 
 // 全局函数
 window.closeEasterEgg = closeEasterEgg;
