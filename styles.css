@@ -671,6 +671,7 @@ section:nth-child(even) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--space-8);
+    align-items: stretch;
 }
 
 .project-card {
@@ -730,9 +731,10 @@ section:nth-child(even) {
 
 .project-card p {
     color: var(--text-secondary);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     line-height: 1.6;
     flex-grow: 1;
+    min-height: 60px;
 }
 
 .project-tags {
@@ -755,6 +757,7 @@ section:nth-child(even) {
     display: flex;
     justify-content: flex-end;
     margin-top: auto;
+    padding-top: var(--space-2);
 }
 
 .status-badge {
@@ -781,6 +784,13 @@ section:nth-child(even) {
     background: rgba(34, 197, 94, 0.1);
     color: #22c55e;
     border: 1px solid #22c55e;
+}
+
+.status-badge.thesis {
+    background: rgba(34, 197, 94, 0.15);
+    color: #16a34a;
+    border: 1px solid #16a34a;
+    font-weight: 700;
 }
 
 /* ========================================
