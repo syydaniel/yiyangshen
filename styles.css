@@ -781,23 +781,22 @@ section:nth-child(even) {
 }
 
 .status-badge.completed {
-    background: rgba(59, 130, 246, 0.1) !important;
-    color: #3b82f6 !important;
-    border: 1px solid #3b82f6 !important;
-    box-shadow: 0 0 0 1px #3b82f6 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    border: none !important;
 }
 
 .status-badge.thesis {
-    background: rgba(34, 197, 94, 0.15) !important;
-    color: #16a34a !important;
-    border: 1px solid #16a34a !important;
+    background: #16a34a !important;
+    color: white !important;
+    border: none !important;
     font-weight: 700;
 }
 
 .status-badge.finland {
-    background: rgba(245, 158, 11, 0.15) !important;
-    color: #d97706 !important;
-    border: 1px solid #d97706 !important;
+    background: #d97706 !important;
+    color: white !important;
+    border: none !important;
     font-weight: 700;
 }
 
