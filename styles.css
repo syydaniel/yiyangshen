@@ -3645,3 +3645,145 @@ h6 {
         animation: none;
     }
 }
+
+/* ========================================
+   性能优化 - 关键渲染路径优化
+   ======================================== */
+
+/* 关键CSS内联优化 */
+.hero,
+.navbar,
+.hero-content,
+.hero-text,
+.hero-title,
+.hero-subtitle,
+.hero-description,
+.hero-buttons {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 动画性能优化 */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) translateZ(0); }
+    50% { transform: translateY(-20px) translateZ(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1) translateZ(0); opacity: 1; }
+    50% { transform: scale(1.05) translateZ(0); opacity: 0.8; }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(74, 144, 226, 0.8); }
+}
+
+@keyframes flow {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 20; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes ripple-animation {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 硬件加速优化 */
+.floating-card,
+.research-location,
+.location-pulse,
+.location-glow,
+.btn,
+.project-card,
+.education-item,
+.timeline-item {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 滚动性能优化 */
+.hero-background-elements {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 图片懒加载优化 */
+img {
+    loading: lazy;
+    decoding: async;
+}
+
+/* 字体加载优化 */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+}
+
+/* 关键资源预加载 */
+.hero {
+    contain: layout style paint;
+}
+
+.navbar {
+    contain: layout style;
+}
+
+/* 减少重绘和重排 */
+.project-card,
+.education-item,
+.timeline-item {
+    contain: layout style paint;
+}
+
+/* 动画性能优化 */
+.animate-in {
+    animation: slideInUp 0.6s ease-out forwards;
+    animation-fill-mode: both;
+}
+
+/* 减少不必要的动画 */
+@media (prefers-reduced-motion: reduce) {
+    .floating-card,
+    .hero-background-elements,
+    .research-location,
+    .location-pulse,
+    .location-glow {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* 内存优化 */
+.hero::before,
+.hero::after {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* 滚动优化 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 视口优化 */
+.viewport-optimized {
+    contain: layout style paint;
+    will-change: transform;
+}

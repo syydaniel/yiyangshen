@@ -1,18 +1,94 @@
-// 等待DOM加载完成
+// 性能优化：防抖和节流函数
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// 性能优化：Intersection Observer 配置
+const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1
+};
+
+// 性能优化：RAF 动画循环
+let animationId;
+function startAnimationLoop() {
+    function animate() {
+        // 动画逻辑
+        animationId = requestAnimationFrame(animate);
+    }
+    animationId = requestAnimationFrame(animate);
+}
+
+function stopAnimationLoop() {
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+}
+
+// 等待DOM加载完成 - 性能优化版本
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化所有功能
+    // 关键功能优先加载
     initNavigation();
     initScrollEffects();
-    initPublicationFilters();
-    initContactForm();
-    initAnimations();
     initMobileMenu();
     initBackToTop();
-    initWorldMap();
-    initEasterEggs();
-    initAdvancedInteractions();
-    initScrollAnimations();
-    initLoadingStates();
+    
+    // 非关键功能延迟加载
+    if (window.requestIdleCallback) {
+        requestIdleCallback(() => {
+            initPublicationFilters();
+            initContactForm();
+            initAnimations();
+            initWorldMap();
+            initEasterEggs();
+            initAdvancedInteractions();
+            initScrollAnimations();
+            initLoadingStates();
+        });
+    } else {
+        // 降级处理
+        setTimeout(() => {
+            initPublicationFilters();
+            initContactForm();
+            initAnimations();
+            initWorldMap();
+            initEasterEggs();
+            initAdvancedInteractions();
+            initScrollAnimations();
+            initLoadingStates();
+        }, 100);
+    }
+    
+    // 性能监控
+    if ('performance' in window) {
+        window.addEventListener('load', function() {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('页面加载时间:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        });
+    }
 });
 
 // 导航栏功能
@@ -80,25 +156,35 @@ function initNavigation() {
 
 // 滚动效果
 function initScrollEffects() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
+    // 使用全局配置的observerOptions
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('loaded');
+                // 性能优化：观察后立即取消观察
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
     // 观察需要动画的元素
-    const animatedElements = document.querySelectorAll('.research-card, .publication-item, .timeline-item, .contact-item');
+    const animatedElements = document.querySelectorAll('.research-card, .publication-item, .timeline-item, .contact-item, .project-card, .education-item');
     animatedElements.forEach(el => {
         el.classList.add('loading');
         observer.observe(el);
     });
+    
+    // 导航栏滚动效果
+    const navbar = document.querySelector('.navbar');
+    const handleNavbarScroll = throttle(function() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }, 16); // 60fps
+    
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
 }
 
 // 学术成果筛选功能
