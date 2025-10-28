@@ -491,13 +491,13 @@ function openPublicationModal(publicationId) {
     // 模拟数据
     const publicationData = {
         'publication1': {
-            title: 'Deep Learning-Based Genomic Variant Prediction Methods',
-            authors: 'John Smith, Jane Doe, Michael Johnson',
-            journal: 'Nature Biotechnology, 2024',
-            abstract: 'This paper presents a novel deep learning approach for predicting genomic variants with high accuracy. Our method combines convolutional neural networks with attention mechanisms to analyze large-scale genomic data, achieving state-of-the-art performance on multiple benchmark datasets. The proposed framework demonstrates significant improvements in variant calling accuracy and computational efficiency compared to existing methods.',
-            citations: 45,
-            impactFactor: 54.9,
-            doi: '10.1038/s41587-024-01234-5'
+            title: 'Urban Structure Impact on Surface Temperature at UBC (2014-2022)',
+            authors: 'Yiyang Shen, Melissa McHale, Cody Bingham',
+            journal: 'UFOR 401 Urban Forestry Capstone Project, 2024',
+            abstract: 'This study investigates the relationship between urban structure and land surface temperature at the University of British Columbia campus from 2014 to 2022. Using 30m resolution satellite imagery and GIS analysis, we mapped urban structure changes and analyzed their correlation with land surface temperature variations. The research employed random forest modeling to predict future temperature patterns based on urban development scenarios, providing insights into urban heat island effects and sustainable campus planning.',
+            citations: 0,
+            impactFactor: 0,
+            doi: 'UBC-UFOR-401-2024'
         }
     };
     
