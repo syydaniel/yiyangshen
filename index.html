@@ -436,10 +436,10 @@
                 </div>
             </div>
             <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fas fa-graduation-cap"></i></a>
+                <a href="https://www.linkedin.com/in/yiyang-shen-%E6%B2%88%E4%BA%A6%E6%97%B8-05502821b/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/syydaniel" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="mailto:syydaniel@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.wur.nl" target="_blank" class="social-link"><i class="fas fa-university"></i></a>
             </div>
         </div>
     </section>
@@ -463,6 +463,44 @@
     <button id="themeToggle" class="theme-toggle" title="Toggle Theme">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- Easter Eggs -->
+    <div id="konamiCode" class="easter-egg hidden">
+        <div class="easter-content">
+            <h3>🎉 Konami Code Activated!</h3>
+            <p>You found the secret! Yiyang's research is powered by curiosity and lots of coffee ☕</p>
+            <button onclick="closeEasterEgg()">Close</button>
+        </div>
+    </div>
+
+    <div id="clickCounter" class="easter-egg hidden">
+        <div class="easter-content">
+            <h3>🖱️ Click Master!</h3>
+            <p>You've clicked <span id="clickCount">0</span> times! That's some serious dedication to exploring my portfolio!</p>
+            <button onclick="closeEasterEgg()">Close</button>
+        </div>
+    </div>
+
+    <div id="scrollMaster" class="easter-egg hidden">
+        <div class="easter-content">
+            <h3>📜 Scroll Explorer!</h3>
+            <p>Wow! You've scrolled <span id="scrollDistance">0</span> pixels! You're really thorough in checking out my work!</p>
+            <button onclick="closeEasterEgg()">Close</button>
+        </div>
+    </div>
+
+    <!-- Hidden elements for easter eggs -->
+    <div class="hidden-elements">
+        <div class="secret-message" data-message="MARINA-Plastic research is fascinating! 🌊">
+            <i class="fas fa-water"></i>
+        </div>
+        <div class="secret-message" data-message="Wageningen University is amazing! 🌱">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <div class="secret-message" data-message="Urban forestry rocks! 🌳">
+            <i class="fas fa-tree"></i>
+        </div>
+    </div>
 
     <!-- Publication Modal -->
     <div id="publicationModal" class="modal">

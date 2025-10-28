@@ -361,6 +361,134 @@ body {
     }
 }
 
+/* 彩蛋样式 */
+.easter-egg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    backdrop-filter: blur(10px);
+}
+
+.easter-egg.hidden {
+    display: none;
+}
+
+.easter-content {
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--shadow-accent);
+    animation: easterBounce 0.5s ease;
+}
+
+.easter-content h3 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.easter-content p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.easter-content button {
+    background: var(--gradient-secondary);
+    color: var(--primary-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.easter-content button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-accent);
+}
+
+.hidden-elements {
+    position: fixed;
+    top: -1000px;
+    left: -1000px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.secret-message {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.secret-message:hover {
+    transform: scale(1.2);
+}
+
+.secret-message i {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+/* 特殊动画 */
+@keyframes easterBounce {
+    0% {
+        transform: scale(0.3) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* 隐藏的彩蛋元素 */
+.nav-logo:hover::after {
+    content: " 🎯";
+    animation: pulse 1s infinite;
+}
+
+.hero-title:hover::after {
+    content: " (Environmental Hero!)";
+    font-size: 0.5em;
+    color: var(--accent-color);
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* 特殊hover效果 */
+.research-card:hover .card-icon i {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
 /* 首页部分 */
 .hero {
     min-height: 100vh;

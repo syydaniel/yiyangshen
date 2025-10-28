@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
     initThemeToggle();
     initModal();
+    initEasterEggs();
 });
 
 // 导航栏功能
@@ -529,3 +530,113 @@ function closeModal() {
 
 // 全局函数，供HTML调用
 window.openPublicationModal = openPublicationModal;
+
+// 彩蛋功能
+function initEasterEggs() {
+    initKonamiCode();
+    initClickCounter();
+    initScrollCounter();
+    initSecretMessages();
+    initHoverEffects();
+}
+
+// Konami Code 彩蛋
+function initKonamiCode() {
+    let konamiCode = [];
+    const konamiSequence = [
+        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+        'KeyB', 'KeyA'
+    ];
+    
+    document.addEventListener('keydown', function(e) {
+        konamiCode.push(e.code);
+        if (konamiCode.length > konamiSequence.length) {
+            konamiCode.shift();
+        }
+        
+        if (konamiCode.join(',') === konamiSequence.join(',')) {
+            showEasterEgg('konamiCode');
+            konamiCode = [];
+        }
+    });
+}
+
+// 点击计数器彩蛋
+function initClickCounter() {
+    let clickCount = 0;
+    
+    document.addEventListener('click', function(e) {
+        clickCount++;
+        
+        if (clickCount === 50) {
+            document.getElementById('clickCount').textContent = clickCount;
+            showEasterEgg('clickCounter');
+        }
+    });
+}
+
+// 滚动距离彩蛋
+function initScrollCounter() {
+    let maxScrollDistance = 0;
+    
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.scrollY;
+        if (currentScroll > maxScrollDistance) {
+            maxScrollDistance = currentScroll;
+        }
+        
+        if (maxScrollDistance > 3000 && maxScrollDistance % 1000 === 0) {
+            document.getElementById('scrollDistance').textContent = maxScrollDistance;
+            showEasterEgg('scrollMaster');
+        }
+    });
+}
+
+// 秘密消息彩蛋
+function initSecretMessages() {
+    const secretMessages = document.querySelectorAll('.secret-message');
+    
+    secretMessages.forEach(message => {
+        message.addEventListener('click', function() {
+            const msg = this.getAttribute('data-message');
+            showNotification(msg, 'success');
+        });
+    });
+}
+
+// 特殊hover效果
+function initHoverEffects() {
+    // 在页面加载时随机放置秘密消息
+    const secretMessages = document.querySelectorAll('.secret-message');
+    secretMessages.forEach((message, index) => {
+        const randomX = Math.random() * (window.innerWidth - 50);
+        const randomY = Math.random() * (window.innerHeight - 50);
+        message.style.left = randomX + 'px';
+        message.style.top = randomY + 'px';
+        message.style.position = 'fixed';
+        message.style.opacity = '0.1';
+        message.style.pointerEvents = 'auto';
+    });
+}
+
+// 显示彩蛋
+function showEasterEgg(eggId) {
+    const egg = document.getElementById(eggId);
+    if (egg) {
+        egg.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// 关闭彩蛋
+function closeEasterEgg() {
+    const eggs = document.querySelectorAll('.easter-egg');
+    eggs.forEach(egg => {
+        egg.classList.add('hidden');
+    });
+    document.body.style.overflow = 'auto';
+}
+
+// 全局函数
+window.closeEasterEgg = closeEasterEgg;
