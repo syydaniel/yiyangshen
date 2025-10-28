@@ -9,7 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
     initWorldMap();
     initAnimations();
     initContactForm();
+    initScrollEffects();
 });
+
+// ========================================
+// 滚动效果
+// ========================================
+function initScrollEffects() {
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
 
 // ========================================
 // 导航功能
@@ -107,21 +123,21 @@ function initMobileMenu() {
 // 世界地图交互
 // ========================================
 function initWorldMap() {
-    const locations = document.querySelectorAll('.location');
+    const locationGroups = document.querySelectorAll('.location-group');
     
-    locations.forEach(location => {
+    locationGroups.forEach(group => {
         // 添加点击事件
-        location.addEventListener('click', function(e) {
+        group.addEventListener('click', function(e) {
             e.preventDefault();
             const locationName = this.classList[1];
             showLocationInfo(locationName);
         });
         
         // 添加键盘支持
-        location.setAttribute('tabindex', '0');
-        location.setAttribute('role', 'button');
+        group.setAttribute('tabindex', '0');
+        group.setAttribute('role', 'button');
         
-        location.addEventListener('keydown', function(e) {
+        group.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const locationName = this.classList[1];
@@ -130,12 +146,12 @@ function initWorldMap() {
         });
         
         // 悬停效果
-        location.addEventListener('mouseenter', function() {
+        group.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.1)';
             this.style.zIndex = '10';
         });
         
-        location.addEventListener('mouseleave', function() {
+        group.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
             this.style.zIndex = '1';
         });
@@ -163,7 +179,7 @@ function showLocationInfo(locationName) {
             university: 'Eastern Finland University',
             period: 'May 2025 - Sep 2025',
             research: 'Research Assistant (Internship)',
-            details: 'Department of Environmental and Biological Sciences. Supervisor: Prof. Frank Berninger. Will conduct field samplings in Lapland including VOC emissions from the Kemi River, perform spectral measurements and water incubations, and analyze field samples using GIS.'
+            details: 'Department of Environmental and Biological Sciences. Supervisor: Prof. Frank Berninger. Will conduct field samplings in Lapland including DOC emissions from the Kemi River, perform spectral measurements and water incubations, and analyze field samples using GIS.'
         },
         china: {
             name: 'Zhejiang, China',
