@@ -36,73 +36,78 @@
     <meta name="keywords" content="research, scientist, academic, portfolio, publications, science">
 </head>
 <body>
+    <!-- 跳过链接 -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <span class="logo-text">Portfolio</span>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+            <ul class="nav-menu" role="menubar" id="nav-menu">
+                <li class="nav-item" role="none">
+                    <a href="#home" class="nav-link" role="menuitem" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                <li class="nav-item" role="none">
+                    <a href="#about" class="nav-link" role="menuitem">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#education" class="nav-link">Education</a>
+                <li class="nav-item" role="none">
+                    <a href="#education" class="nav-link" role="menuitem">Education</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
+                <li class="nav-item" role="none">
+                    <a href="#experience" class="nav-link" role="menuitem">Experience</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                <li class="nav-item" role="none">
+                    <a href="#projects" class="nav-link" role="menuitem">Projects</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#publications" class="nav-link">Publications</a>
+                <li class="nav-item" role="none">
+                    <a href="#publications" class="nav-link" role="menuitem">Publications</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                <li class="nav-item" role="none">
+                    <a href="#contact" class="nav-link" role="menuitem">Contact</a>
                 </li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Main Content -->
+    <main id="main-content">
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" role="banner" aria-labelledby="hero-title">
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-text">
                     <div class="hero-badge">Environmental Researcher</div>
-                    <h1 class="hero-title">Yiyang Shen</h1>
+                    <h1 class="hero-title" id="hero-title">Yiyang Shen</h1>
                     <p class="hero-subtitle">Master's Student in Urban Environmental Management</p>
                     <p class="hero-description">Passionate about water systems, global change, and sustainable urban development. Currently conducting research at Wageningen University & Research.</p>
-                    <div class="hero-buttons">
-                        <a href="#about" class="btn btn-primary">
+                    <div class="hero-buttons" role="group" aria-label="Main actions">
+                        <a href="#about" class="btn btn-primary" aria-describedby="about-description">
                             <span>Explore My Work</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
-                        <a href="#contact" class="btn btn-secondary">
+                        <a href="#contact" class="btn btn-secondary" aria-describedby="contact-description">
                             <span>Get In Touch</span>
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="hero-quick-stats">
+                    <div class="hero-quick-stats" role="group" aria-label="Research statistics">
                         <div class="quick-stat">
-                            <span class="stat-number">4</span>
+                            <span class="stat-number" aria-label="Four">4</span>
                             <span class="stat-label">Countries</span>
                         </div>
                         <div class="quick-stat">
-                            <span class="stat-number">6+</span>
+                            <span class="stat-number" aria-label="Six plus">6+</span>
                             <span class="stat-label">Projects</span>
                         </div>
                         <div class="quick-stat">
-                            <span class="stat-number">3</span>
+                            <span class="stat-number" aria-label="Three">3</span>
                             <span class="stat-label">Universities</span>
                         </div>
                     </div>
@@ -148,13 +153,13 @@
     </section>
 
     <!-- Interactive World Map Section -->
-    <section class="world-map-section">
+    <section class="world-map-section" aria-labelledby="map-title">
         <div class="container">
             <div class="world-map-container">
-                <h3 class="map-title">Research Journey Around the World</h3>
-                <p class="map-subtitle">Click on the locations to explore my research experiences</p>
+                <h3 class="map-title" id="map-title">Research Journey Around the World</h3>
+                <p class="map-subtitle" id="map-description">Click on the locations to explore my research experiences. Use keyboard navigation with Tab and Enter keys.</p>
                 <div class="world-map">
-                    <svg viewBox="0 0 1000 500" class="map-svg">
+                    <svg viewBox="0 0 1000 500" class="map-svg" role="img" aria-labelledby="map-title" aria-describedby="map-description">
                         <!-- 极简主义世界地图背景 -->
                         <defs>
                             <linearGradient id="oceanGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -191,63 +196,63 @@
                         
                         <!-- 研究位置点 - 参考设计风格 -->
                         <!-- China (Hangzhou) - 绿色圆点 -->
-                        <g class="location-group china" transform="translate(720, 280)">
-                            <circle class="research-location china" cx="0" cy="0" r="6" fill="#22c55e" stroke="none"/>
-                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500">Hangzhou</text>
+                        <g class="location-group china" transform="translate(720, 280)" role="button" tabindex="0" aria-label="Research location: Hangzhou, China" aria-describedby="china-details">
+                            <circle class="research-location china" cx="0" cy="0" r="6" fill="#22c55e" stroke="none" aria-hidden="true"/>
+                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500" aria-hidden="true">Hangzhou</text>
                         </g>
                         
                         <!-- Canada (Vancouver) - 绿色圆点 -->
-                        <g class="location-group canada" transform="translate(120, 150)">
-                            <circle class="research-location canada" cx="0" cy="0" r="6" fill="#22c55e" stroke="none"/>
-                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500">Vancouver</text>
+                        <g class="location-group canada" transform="translate(120, 150)" role="button" tabindex="0" aria-label="Research location: Vancouver, Canada" aria-describedby="canada-details">
+                            <circle class="research-location canada" cx="0" cy="0" r="6" fill="#22c55e" stroke="none" aria-hidden="true"/>
+                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500" aria-hidden="true">Vancouver</text>
                         </g>
                         
                         <!-- Finland (Joensuu) - 绿色圆点 -->
-                        <g class="location-group finland" transform="translate(480, 100)">
-                            <circle class="research-location finland" cx="0" cy="0" r="6" fill="#22c55e" stroke="none"/>
-                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500">Joensuu</text>
+                        <g class="location-group finland" transform="translate(480, 100)" role="button" tabindex="0" aria-label="Research location: Joensuu, Finland" aria-describedby="finland-details">
+                            <circle class="research-location finland" cx="0" cy="0" r="6" fill="#22c55e" stroke="none" aria-hidden="true"/>
+                            <text class="location-label" x="0" y="20" text-anchor="middle" fill="#374151" font-size="10" font-weight="500" aria-hidden="true">Joensuu</text>
                         </g>
                         
                         <!-- Netherlands (Wageningen) - 橙色图钉（主要位置） -->
-                        <g class="location-group netherlands" transform="translate(460, 140)">
-                            <path class="research-location netherlands" d="M0,-12 L-8,8 L0,4 L8,8 Z" fill="#f97316" stroke="none"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#374151" font-size="10" font-weight="600">Wageningen</text>
+                        <g class="location-group netherlands" transform="translate(460, 140)" role="button" tabindex="0" aria-label="Current research location: Wageningen, Netherlands" aria-describedby="netherlands-details">
+                            <path class="research-location netherlands" d="M0,-12 L-8,8 L0,4 L8,8 Z" fill="#f97316" stroke="none" aria-hidden="true"/>
+                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#374151" font-size="10" font-weight="600" aria-hidden="true">Wageningen</text>
                         </g>
                     </svg>
                     
                     <!-- 底部行动按钮 - 参考设计 -->
                     <div class="map-actions">
-                        <button class="explore-btn">
+                        <button class="explore-btn" aria-describedby="explore-description">
                             <span>Explore research network further</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </button>
                     </div>
                     
                     <!-- Location details -->
-                    <div class="location-details">
-                        <div class="location-item" data-location="china">
-                            <h4>🇨🇳 Hangzhou, China</h4>
+                    <div class="location-details" role="region" aria-label="Research location details">
+                        <div class="location-item" data-location="china" id="china-details" role="article" aria-labelledby="china-title">
+                            <h4 id="china-title">🇨🇳 Hangzhou, China</h4>
                             <p>Zhejiang Agriculture and Forestry University</p>
                             <p>Environmental Microbiology Research</p>
-                            <a href="#projects" class="location-link">View Projects</a>
+                            <a href="#projects" class="location-link" aria-label="View projects from Hangzhou research">View Projects</a>
                         </div>
-                        <div class="location-item" data-location="canada">
-                            <h4>🇨🇦 Vancouver, Canada</h4>
+                        <div class="location-item" data-location="canada" id="canada-details" role="article" aria-labelledby="canada-title">
+                            <h4 id="canada-title">🇨🇦 Vancouver, Canada</h4>
                             <p>University of British Columbia</p>
                             <p>Urban Forestry & Climate Research</p>
-                            <a href="#projects" class="location-link">View Projects</a>
+                            <a href="#projects" class="location-link" aria-label="View projects from Vancouver research">View Projects</a>
                         </div>
-                        <div class="location-item" data-location="finland">
-                        <h4>🇫🇮 Joensuu, Finland</h4>
-                        <p>Eastern Finland University</p>
-                        <p>DOC Research</p>
-                            <a href="#projects" class="location-link">View Projects</a>
+                        <div class="location-item" data-location="finland" id="finland-details" role="article" aria-labelledby="finland-title">
+                            <h4 id="finland-title">🇫🇮 Joensuu, Finland</h4>
+                            <p>Eastern Finland University</p>
+                            <p>DOC Research</p>
+                            <a href="#projects" class="location-link" aria-label="View projects from Joensuu research">View Projects</a>
                         </div>
-                        <div class="location-item" data-location="netherlands">
-                            <h4>🇳🇱 Wageningen, Netherlands</h4>
+                        <div class="location-item" data-location="netherlands" id="netherlands-details" role="article" aria-labelledby="netherlands-title">
+                            <h4 id="netherlands-title">🇳🇱 Wageningen, Netherlands</h4>
                             <p>Wageningen University & Research</p>
                             <p>Master's Thesis Research</p>
-                            <a href="#projects" class="location-link">View Projects</a>
+                            <a href="#projects" class="location-link" aria-label="View projects from Wageningen research">View Projects</a>
                         </div>
                     </div>
                 </div>
@@ -686,6 +691,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
