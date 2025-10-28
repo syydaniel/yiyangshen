@@ -130,39 +130,94 @@
                 <p class="map-subtitle">Click on the locations to explore my research experiences</p>
                 <div class="world-map">
                     <svg viewBox="0 0 1000 500" class="map-svg">
-                        <!-- Simplified world map paths -->
-                        <path class="continent" d="M150,200 L300,180 L350,220 L320,280 L200,300 L150,250 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
-                        <path class="continent" d="M100,300 L250,280 L300,320 L280,380 L150,400 L100,350 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
-                        <path class="continent" d="M400,150 L600,140 L650,180 L620,240 L500,260 L400,200 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
-                        <path class="continent" d="M700,200 L900,190 L950,230 L920,290 L800,310 L700,250 Z" fill="rgba(30,30,30,0.3)" stroke="rgba(74,144,226,0.3)" stroke-width="1"/>
+                        <!-- 世界地图背景 -->
+                        <defs>
+                            <linearGradient id="oceanGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0a1a2e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="landGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:0.8" />
+                                <stop offset="100%" style="stop-color:#34495e;stop-opacity:0.6" />
+                            </linearGradient>
+                        </defs>
                         
-                        <!-- Research locations -->
+                        <!-- 海洋背景 -->
+                        <rect width="1000" height="500" fill="url(#oceanGradient)"/>
+                        
+                        <!-- 大陆轮廓 - 更真实的世界地图 -->
+                        <!-- 北美洲 -->
+                        <path class="continent north-america" d="M50,100 L150,80 L200,90 L220,120 L200,160 L180,200 L150,220 L120,200 L80,180 L60,150 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 南美洲 -->
+                        <path class="continent south-america" d="M150,250 L200,240 L220,280 L200,350 L180,400 L150,380 L130,320 L140,280 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 欧洲 -->
+                        <path class="continent europe" d="M400,120 L500,110 L520,140 L500,180 L480,200 L450,190 L420,160 L400,140 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 非洲 -->
+                        <path class="continent africa" d="M450,200 L550,190 L570,250 L550,350 L530,400 L500,380 L470,320 L450,250 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 亚洲 -->
+                        <path class="continent asia" d="M500,80 L700,70 L750,100 L800,120 L850,150 L800,200 L750,250 L700,220 L650,180 L600,150 L550,120 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 大洋洲 -->
+                        <path class="continent oceania" d="M650,350 L750,340 L780,380 L750,420 L700,430 L650,400 Z" fill="url(#landGradient)" stroke="rgba(74,144,226,0.4)" stroke-width="1"/>
+                        
+                        <!-- 网格线 -->
+                        <defs>
+                            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(74,144,226,0.1)" stroke-width="0.5"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1000" height="500" fill="url(#grid)"/>
+                        
+                        <!-- 研究位置点 -->
                         <!-- China (Hangzhou) -->
-                        <g class="location-group china" transform="translate(750, 280)">
-                            <circle class="research-location china" cx="0" cy="0" r="12" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
-                            <circle class="location-pulse china" cx="0" cy="0" r="12" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.6"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Hangzhou, China</text>
+                        <g class="location-group china" transform="translate(720, 280)">
+                            <circle class="location-pulse china" cx="0" cy="0" r="15" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+                            <circle class="research-location china" cx="0" cy="0" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
+                            <circle class="location-glow china" cx="0" cy="0" r="12" fill="none" stroke="#7ED321" stroke-width="1" opacity="0.6"/>
+                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="500">Hangzhou, China</text>
+                            <text class="location-institution" x="0" y="40" text-anchor="middle" fill="#B0B0B0" font-size="9">Zhejiang A&F University</text>
+                            <text class="location-field" x="0" y="55" text-anchor="middle" fill="#7ED321" font-size="8">Environmental Microbiology</text>
                         </g>
                         
                         <!-- Canada (Vancouver) -->
-                        <g class="location-group canada" transform="translate(200, 180)">
-                            <circle class="research-location canada" cx="0" cy="0" r="12" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
-                            <circle class="location-pulse canada" cx="0" cy="0" r="12" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.6"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Vancouver, Canada</text>
+                        <g class="location-group canada" transform="translate(120, 150)">
+                            <circle class="location-pulse canada" cx="0" cy="0" r="15" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+                            <circle class="research-location canada" cx="0" cy="0" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
+                            <circle class="location-glow canada" cx="0" cy="0" r="12" fill="none" stroke="#7ED321" stroke-width="1" opacity="0.6"/>
+                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="500">Vancouver, Canada</text>
+                            <text class="location-institution" x="0" y="40" text-anchor="middle" fill="#B0B0B0" font-size="9">University of British Columbia</text>
+                            <text class="location-field" x="0" y="55" text-anchor="middle" fill="#7ED321" font-size="8">Urban Forestry & Climate</text>
                         </g>
                         
                         <!-- Finland (Joensuu) -->
-                        <g class="location-group finland" transform="translate(500, 120)">
-                            <circle class="research-location finland" cx="0" cy="0" r="12" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
-                            <circle class="location-pulse finland" cx="0" cy="0" r="12" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.6"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Joensuu, Finland</text>
+                        <g class="location-group finland" transform="translate(480, 100)">
+                            <circle class="location-pulse finland" cx="0" cy="0" r="15" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+                            <circle class="research-location finland" cx="0" cy="0" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
+                            <circle class="location-glow finland" cx="0" cy="0" r="12" fill="none" stroke="#7ED321" stroke-width="1" opacity="0.6"/>
+                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="500">Joensuu, Finland</text>
+                            <text class="location-institution" x="0" y="40" text-anchor="middle" fill="#B0B0B0" font-size="9">Eastern Finland University</text>
+                            <text class="location-field" x="0" y="55" text-anchor="middle" fill="#7ED321" font-size="8">DOC Research</text>
                         </g>
                         
                         <!-- Netherlands (Wageningen) -->
-                        <g class="location-group netherlands" transform="translate(480, 180)">
-                            <circle class="research-location netherlands" cx="0" cy="0" r="12" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
-                            <circle class="location-pulse netherlands" cx="0" cy="0" r="12" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.6"/>
-                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="12" font-weight="500">Wageningen, Netherlands</text>
+                        <g class="location-group netherlands" transform="translate(460, 140)">
+                            <circle class="location-pulse netherlands" cx="0" cy="0" r="15" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+                            <circle class="research-location netherlands" cx="0" cy="0" r="8" fill="#4A90E2" stroke="#fff" stroke-width="2"/>
+                            <circle class="location-glow netherlands" cx="0" cy="0" r="12" fill="none" stroke="#7ED321" stroke-width="1" opacity="0.6"/>
+                            <text class="location-label" x="0" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="500">Wageningen, Netherlands</text>
+                            <text class="location-institution" x="0" y="40" text-anchor="middle" fill="#B0B0B0" font-size="9">Wageningen University</text>
+                            <text class="location-field" x="0" y="55" text-anchor="middle" fill="#7ED321" font-size="8">Urban Environmental Mgmt</text>
+                        </g>
+                        
+                        <!-- 连接线 -->
+                        <g class="connection-lines">
+                            <line x1="120" y1="150" x2="460" y2="140" stroke="rgba(74,144,226,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+                            <line x1="460" y1="140" x2="480" y2="100" stroke="rgba(74,144,226,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+                            <line x1="480" y1="100" x2="720" y2="280" stroke="rgba(74,144,226,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
                         </g>
                     </svg>
                     

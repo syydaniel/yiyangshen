@@ -7,11 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initAnimations();
     initMobileMenu();
-    initSearch();
     initBackToTop();
-    initThemeToggle();
     initWorldMap();
-    initModal();
     initEasterEggs();
     initAdvancedInteractions();
     initScrollAnimations();
@@ -360,54 +357,6 @@ function debounce(func, wait) {
 }
 
 // 搜索功能
-function initSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.querySelector('.search-btn');
-    
-    if (searchInput && searchBtn) {
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-        
-        searchInput.addEventListener('input', function() {
-            if (this.value.length > 2) {
-                performSearch();
-            }
-        });
-    }
-}
-
-function performSearch() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const searchableElements = document.querySelectorAll('.publication-title, .card-title, .timeline-title, .about-description');
-    
-    searchableElements.forEach(element => {
-        const text = element.textContent.toLowerCase();
-        const parent = element.closest('.publication-item, .research-card, .timeline-item, .about-text');
-        
-        if (text.includes(searchTerm)) {
-            if (parent) {
-                parent.style.display = 'block';
-                parent.style.opacity = '1';
-                parent.style.transform = 'translateY(0)';
-                parent.classList.add('search-highlight');
-            }
-        } else if (searchTerm.length > 0) {
-            if (parent) {
-                parent.style.opacity = '0.3';
-                parent.classList.remove('search-highlight');
-            }
-        } else {
-            if (parent) {
-                parent.style.opacity = '1';
-                parent.classList.remove('search-highlight');
-            }
-        }
-    });
-}
 
 // 回到顶部功能
 function initBackToTop() {
@@ -431,45 +380,6 @@ function initBackToTop() {
     }
 }
 
-// 主题切换功能
-function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    
-    if (themeToggle) {
-        // 检查本地存储的主题设置
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            body.classList.add(savedTheme);
-            updateThemeIcon(savedTheme);
-        }
-        
-        themeToggle.addEventListener('click', function() {
-            if (body.classList.contains('light-theme')) {
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-                localStorage.setItem('theme', 'dark-theme');
-                updateThemeIcon('dark-theme');
-            } else {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-                localStorage.setItem('theme', 'light-theme');
-                updateThemeIcon('light-theme');
-            }
-        });
-    }
-}
-
-function updateThemeIcon(theme) {
-    const themeToggle = document.getElementById('themeToggle');
-    const icon = themeToggle.querySelector('i');
-    
-    if (theme === 'light-theme') {
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
-    }
-}
 
 // 使用防抖优化滚动事件
 const debouncedScrollHandler = debounce(function() {
@@ -478,81 +388,6 @@ const debouncedScrollHandler = debounce(function() {
 
 window.addEventListener('scroll', debouncedScrollHandler);
 
-// 模态框功能
-function initModal() {
-    const modal = document.getElementById('publicationModal');
-    const closeButtons = document.querySelectorAll('.modal-close');
-    
-    if (modal) {
-        // 关闭模态框
-        closeButtons.forEach(button => {
-            button.addEventListener('click', closeModal);
-        });
-        
-        // 点击背景关闭模态框
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-        
-        // ESC键关闭模态框
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                closeModal();
-            }
-        });
-    }
-}
-
-function openPublicationModal(publicationId) {
-    const modal = document.getElementById('publicationModal');
-    const title = document.querySelector('.modal-publication-title');
-    const authors = document.querySelector('.modal-publication-authors');
-    const journal = document.querySelector('.modal-publication-journal');
-    const abstract = document.querySelector('.abstract-text');
-    
-    // 模拟数据
-    const publicationData = {
-        'publication1': {
-            title: 'Urban Structure Impact on Surface Temperature at UBC (2014-2022)',
-            authors: 'Yiyang Shen, Melissa McHale, Cody Bingham',
-            journal: 'UFOR 401 Urban Forestry Capstone Project, 2024',
-            abstract: 'This study investigates the relationship between urban structure and land surface temperature at the University of British Columbia campus from 2014 to 2022. Using 30m resolution satellite imagery and GIS analysis, we mapped urban structure changes and analyzed their correlation with land surface temperature variations. The research employed random forest modeling to predict future temperature patterns based on urban development scenarios, providing insights into urban heat island effects and sustainable campus planning.',
-            citations: 0,
-            impactFactor: 0,
-            doi: 'UBC-UFOR-401-2024'
-        }
-    };
-    
-    const data = publicationData[publicationId];
-    if (data) {
-        title.textContent = data.title;
-        authors.textContent = data.authors;
-        journal.textContent = data.journal;
-        abstract.textContent = data.abstract;
-        
-        // 更新指标
-        const metrics = document.querySelectorAll('.metric-value');
-        if (metrics.length >= 3) {
-            metrics[0].textContent = data.citations;
-            metrics[1].textContent = data.impactFactor;
-            metrics[2].textContent = data.doi;
-        }
-        
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById('publicationModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// 全局函数，供HTML调用
-window.openPublicationModal = openPublicationModal;
 
 // 彩蛋功能
 function initEasterEggs() {
@@ -667,10 +502,23 @@ function initWorldMap() {
     const locationItems = document.querySelectorAll('.location-item');
     
     // 为每个地图点组添加点击事件
-    locationGroups.forEach(group => {
+    locationGroups.forEach((group, index) => {
+        group.setAttribute('tabindex', '0');
+        group.setAttribute('role', 'button');
+        group.setAttribute('aria-label', `Research location ${index + 1}`);
+        
         group.addEventListener('click', function() {
             const locationClass = this.classList[1]; // 获取国家类名
             showLocationDetails(locationClass);
+        });
+        
+        // 键盘导航支持
+        group.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const locationClass = this.classList[1];
+                showLocationDetails(locationClass);
+            }
         });
         
         // 添加悬停效果

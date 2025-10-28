@@ -16,10 +16,10 @@
     --accent-secondary: #7b68ee;
     --accent-tertiary: #20b2aa;
     --text-primary: #FFFFFF;
-    --text-secondary: #E0E0E0;
-    --text-light: #B0B0B0;
-    --text-dark: #2c2c2c;
-    --text-muted: #808080;
+    --text-secondary: #E8E8E8;
+    --text-light: #C0C0C0;
+    --text-dark: #1a1a1a;
+    --text-muted: #888888;
     --bg-primary: #0A0A0A;
     --bg-secondary: #1A1A1A;
     --bg-tertiary: #252525;
@@ -50,11 +50,47 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--bg-primary);
-    color: var(--primary-color);
+    color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    font-weight: 400;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 2rem;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 500;
 }
 
 /* 导航栏样式 */
@@ -1307,6 +1343,30 @@ body {
     padding: 2rem;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-color);
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.world-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(74, 144, 226, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .map-svg {
@@ -1332,27 +1392,51 @@ body {
 
 .research-location {
     transition: all 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 8px rgba(74, 144, 226, 0.4));
 }
 
 .location-pulse {
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.location-glow {
+    animation: glow 2s ease-in-out infinite alternate;
 }
 
 .location-group:hover .research-location {
     fill: #7ED321;
-    stroke: #4A90E2;
+    stroke: #fff;
     stroke-width: 3;
-    transform: scale(1.2);
+    transform: scale(1.3);
+    filter: drop-shadow(0 4px 12px rgba(126, 211, 33, 0.6));
 }
 
 .location-group:hover .location-pulse {
-    animation: pulse-fast 0.5s ease-in-out infinite;
+    animation: pulse-fast 0.8s ease-in-out infinite;
+    stroke: #7ED321;
+    stroke-width: 3;
+}
+
+.location-group:hover .location-glow {
+    animation: glow-fast 0.5s ease-in-out infinite alternate;
+    stroke: #4A90E2;
+    stroke-width: 2;
 }
 
 .location-group:hover .location-label {
     opacity: 1;
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    font-weight: 600;
+}
+
+.location-group:hover .location-institution {
+    opacity: 1;
+    transform: translateY(-6px);
+}
+
+.location-group:hover .location-field {
+    opacity: 1;
+    transform: translateY(-4px);
 }
 
 .location-label {
@@ -1361,6 +1445,59 @@ body {
     opacity: 0;
     transition: all 0.3s ease;
     transform: translateY(0);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.location-institution {
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.location-field {
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+}
+
+.connection-lines {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.connection-lines:hover {
+    opacity: 1;
+}
+
+.connection-lines line {
+    stroke-dasharray: 10, 5;
+    animation: flow 3s linear infinite;
+}
+
+@keyframes flow {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 15;
+    }
+}
+
+.continent {
+    transition: all 0.3s ease;
+}
+
+.continent:hover {
+    fill: rgba(52, 73, 94, 0.9);
+    stroke: rgba(74, 144, 226, 0.6);
+    stroke-width: 2;
 }
 
 @keyframes pulse {
@@ -1376,12 +1513,34 @@ body {
 
 @keyframes pulse-fast {
     0%, 100% {
-        r: 12;
+        r: 15;
         opacity: 0.8;
     }
     50% {
-        r: 20;
+        r: 25;
+        opacity: 0.2;
+    }
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.6;
+        r: 12;
+    }
+    100% {
         opacity: 0.3;
+        r: 18;
+    }
+}
+
+@keyframes glow-fast {
+    0% {
+        opacity: 0.8;
+        r: 12;
+    }
+    100% {
+        opacity: 0.4;
+        r: 20;
     }
 }
 
@@ -1460,15 +1619,30 @@ body {
     }
     
     .research-location {
-        r: 15;
+        transform: scale(1.25);
     }
     
     .location-pulse {
-        r: 15;
+        transform: scale(1.25);
     }
     
     .location-label {
         font-size: 11px;
+        opacity: 1;
+    }
+    
+    .location-institution {
+        font-size: 8px;
+        opacity: 0.8;
+    }
+    
+    .location-field {
+        font-size: 7px;
+        opacity: 0.8;
+    }
+    
+    .location-group:hover .location-institution,
+    .location-group:hover .location-field {
         opacity: 1;
     }
     
@@ -1481,10 +1655,37 @@ body {
     .location-item {
         padding: 1rem;
     }
-}
     
-    /* 优化导航菜单在移动端的显示 */
-    .nav-menu {
+    /* 移动端标题优化 */
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    h2 {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+    
+    /* 移动端按钮优化 */
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.85rem;
+    }
+    
+    /* 移动端卡片优化 */
+    .project-card, .education-item, .timeline-item {
+        padding: 1.2rem;
+    }
+}
+
+/* 优化导航菜单在移动端的显示 */
+.nav-menu {
         position: fixed;
         left: -100%;
         top: 80px;
