@@ -147,30 +147,30 @@ function showLocationInfo(locationName) {
         canada: {
             name: 'Vancouver, Canada',
             university: 'University of British Columbia',
-            period: '2020-2024',
-            research: 'Environmental Science studies and urban sustainability research',
-            details: 'Completed Bachelor\'s degree in Environmental Science with focus on sustainable urban development and environmental policy.'
+            period: 'Sep 2021 - May 2024',
+            research: 'Bachelor of Urban Forestry (Green Space Management)',
+            details: 'Completed Bachelor\'s degree with GPA 83.7/100. Supervisor: Prof. Andrew Almas. Graduated with Honors. Focus on urban forestry, green space management, and environmental sustainability.'
         },
         netherlands: {
             name: 'Wageningen, Netherlands',
             university: 'Wageningen University & Research',
-            period: '2024-2026',
-            research: 'Current Master\'s program in Urban Environmental Management',
-            details: 'Currently pursuing Master\'s degree with focus on water systems, climate change adaptation, and sustainable urban development.'
+            period: 'Sep 2024 - Jun 2026',
+            research: 'Master of Urban Environmental Management (Water System and Global Change)',
+            details: 'Currently pursuing Master\'s degree. Supervisor: Prof. Maryna Strokal. Focus on water systems, global change, and sustainable urban development. Future thesis topic: water, urban, BGI, NBS (to be confirmed Sep 2025).'
         },
         finland: {
             name: 'Joensuu, Finland',
-            university: 'University of Eastern Finland',
-            period: '2023-2024',
-            research: 'Forest ecosystem research and climate change studies',
-            details: 'Conducted research in Varrio Research Forest on climate change impacts on forest ecosystems and biodiversity.'
+            university: 'Eastern Finland University',
+            period: 'May 2025 - Sep 2025',
+            research: 'Research Assistant (Internship)',
+            details: 'Department of Environmental and Biological Sciences. Supervisor: Prof. Frank Berninger. Will conduct field samplings in Lapland including VOC emissions from the Kemi River, perform spectral measurements and water incubations, and analyze field samples using GIS.'
         },
         china: {
-            name: 'Hangzhou, China',
-            university: 'Zhejiang University',
-            period: '2022-2023',
-            research: 'Urban environmental assessment and sustainable development',
-            details: 'Worked on urban sustainability assessment projects and environmental impact evaluations for Chinese cities.'
+            name: 'Zhejiang, China',
+            university: 'Zhejiang Agriculture and Forestry University',
+            period: 'Sep 2019 - Jun 2024',
+            research: 'Bachelor of Forestry',
+            details: 'Completed Bachelor\'s degree with GPA 87.7/100. Supervisors: Prof. Yeqing Ying & Prof. Wenhui Shi. State Key Laboratory of Subtropical Silviculture. Research on phosphorus-solubilizing microorganisms and plant-microbe interactions.'
         }
     };
     
