@@ -221,115 +221,68 @@
                 <h2>Welcome to the Flux Analysis Hub</h2>
                 <p>
                     This integrated platform provides comprehensive tools for analyzing coastal microplastic flux
-                    uncertainty
-                    using Monte Carlo simulations and high-dimensional parameter space exploration.
+                    uncertainty, combining Monte Carlo simulations, global mapping, and parameter space exploration.
                 </p>
 
                 <div class="feature-grid">
                     <div class="feature-card" onclick="showTab('dashboard')">
-                        <div class="icon">📊</div>
-                        <h3>Interactive Dashboard</h3>
-                        <p>Real-time Monte Carlo analysis with 1000 iterations</p>
-                        <p style="margin-top: 10px; font-size: 0.9em;">
-                            • Quantile analysis (P5/P50/P95)<br>
-                            • Convergence monitoring<br>
-                            • Preset scenarios<br>
-                            • Mathematical formulas
+                        <div class="icon">🚀</div>
+                        <h3>Launch Integrated Dashboard</h3>
+                        <p>Access the full suite of tools:</p>
+                        <p style="margin-top: 10px; font-size: 0.9em; text-align: left; padding-left: 20px;">
+                            • <b>Interactive Map:</b> Real-time mass flux visualization.<br>
+                            • <b>Uncertainty Analysis:</b> Monte Carlo simulations & distributions.<br>
+                            • <b>3D Explorer:</b> Parameter space visualization.<br>
                         </p>
                     </div>
 
-                    <div class="feature-card" onclick="showTab('surface')">
-                        <div class="icon">🌐</div>
-                        <h3>3D Surface Explorer</h3>
-                        <p>High-dimensional parameter space visualization</p>
-                        <p style="margin-top: 10px; font-size: 0.9em;">
-                            • 4 interactive surfaces<br>
-                            • Adjustable resolution<br>
-                            • P5/P50/P95 surfaces<br>
-                            • Uncertainty range mapping
-                        </p>
-                    </div>
-
-                    <div class="feature-card" onclick="showTab('map')">
-                        <div class="icon">🗺️</div>
-                        <h3>Global Map Visualization</h3>
-                        <p>Interactive world map of coastal flux distribution</p>
-                        <p style="margin-top: 10px; font-size: 0.9em;">
-                            • Level 12 coastal basins<br>
-                            • Size-coded markers<br>
-                            • Adjustable parameters<br>
-                            • Real-time updates
-                        </p>
+                    <div class="feature-card" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);"
+                        onclick="window.open('https://github.com/syydaniel/Microplastics-output-estimation-', '_blank')">
+                        <div class="icon">📂</div>
+                        <h3>Project Repository</h3>
+                        <p>View source code and documentation on GitHub</p>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
 
-    <div id="dashboard" class="tab-content">
-        <div class="loading">Loading dashboard...</div>
-        <iframe id="dashboardFrame" src=""></iframe>
-    </div>
-
-    <div id="surface" class="tab-content">
-        <div class="loading">Loading surface explorer...</div>
-        <iframe id="surfaceFrame" src=""></iframe>
-    </div>
-
-    <div id="map" class="tab-content">
-        <div class="loading">Loading map visualization...</div>
-        <iframe id="mapFrame" src=""></iframe>
-    </div>
+        <div id="dashboard" class="tab-content">
+            <div class="loading">Loading dashboard...</div>
+            <iframe id="dashboardFrame" src=""></iframe>
+        </div>
     </div>
 
     <script>
         let dashboardLoaded = false;
-        let surfaceLoaded = false;
-        let mapLoaded = false;
 
         function showTab(tabName) {
             // Update tab buttons
             const buttons = document.querySelectorAll('.tab-button');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // If called from a tab button (not a card), highlight it
+            if (event.target.classList.contains('tab-button')) {
+                event.target.classList.add('active');
+            } else {
+                // If called from a card, find the corresponding tab button
+                const btn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(tabName));
+                if (btn) btn.classList.add('active');
+            }
 
             // Update tab contents
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
 
-            // Lazy load iframes
+            // Lazy load iframe
             if (tabName === 'dashboard' && !dashboardLoaded) {
                 const loading = document.querySelector('#dashboard .loading');
                 loading.style.display = 'block';
                 const iframe = document.getElementById('dashboardFrame');
-                iframe.src = 'Flux_Dashboard.html';
+                iframe.src = 'Integrated_Flux_Dashboard.html';
                 iframe.onload = () => {
                     loading.style.display = 'none';
                     dashboardLoaded = true;
-                };
-            }
-
-            if (tabName === 'surface' && !surfaceLoaded) {
-                const loading = document.querySelector('#surface .loading');
-                loading.style.display = 'block';
-                const iframe = document.getElementById('surfaceFrame');
-                iframe.src = 'Surface_Explorer_3D.html';
-                iframe.onload = () => {
-                    loading.style.display = 'none';
-                    surfaceLoaded = true;
-                };
-            }
-
-            if (tabName === 'map' && !mapLoaded) {
-                const loading = document.querySelector('#map .loading');
-                loading.style.display = 'block';
-                const iframe = document.getElementById('mapFrame');
-                iframe.src = 'Map_Visualization.html';
-                iframe.onload = () => {
-                    loading.style.display = 'none';
-                    mapLoaded = true;
                 };
             }
         }
@@ -337,8 +290,6 @@
         // Disable cache for iframes
         window.addEventListener('beforeunload', function () {
             document.getElementById('dashboardFrame').src = '';
-            document.getElementById('surfaceFrame').src = '';
-            document.getElementById('mapFrame').src = '';
         });
     </script>
 </body>
