@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Parameter Space - Flux Uncertainty Surface</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .surface-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .surface-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .surface-card h2 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .formula-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+
+        .controls {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .control-item label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .control-item input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .control-item input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 High-Dimensional Parameter Space Explorer</h1>
+            <div class="subtitle">3D Surface Visualization of Flux Uncertainty Across Parameter Space</div>
+        </header>
+
+        <div class="controls">
+            <h3 style="margin-bottom: 15px;">Surface Resolution Controls</h3>
+            <div class="control-row">
+                <div class="control-item">
+                    <label>Grid Resolution</label>
+                    <input type="range" id="resSlider" min="5" max="15" value="10">
+                    <div class="value-display" id="resValue">10 × 10</div>
+                </div>
+                <div class="control-item">
+                    <label>Max Size (μm)</label>
+                    <input type="range" id="maxSizeSlider" min="3000" max="8000" step="500" value="5000">
+                    <div class="value-display" id="maxSizeValue">5000</div>
+                </div>
+                <div class="control-item">
+                    <label>MC Samples per Point</label>
+                    <input type="range" id="samplesSlider" min="200" max="1000" step="100" value="500">
+                    <div class="value-display" id="samplesValue">500</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="surface-grid">
+            <div class="surface-card">
+                <h2>P5 Surface (5th Percentile)</h2>
+                <div class="formula-box">
+                    <strong>Formula:</strong> Φ<sub>P5</sub>(α, d<sub>min</sub>) =
+                    Percentile<sub>5</sub>[Φ<sub>i</sub>]<br>
+                    Conservative flux estimate across parameter space
+                </div>
+                <div id="surfaceP5" style="height: 500px;"></div>
+            </div>
+
+            <div class="surface-card">
+                <h2>P50 Surface (Median)</h2>
+                <div class="formula-box">
+                    <strong>Formula:</strong> Φ<sub>P50</sub>(α, d<sub>min</sub>) =
+                    Percentile<sub>50</sub>[Φ<sub>i</sub>]<br>
+                    Best estimate flux across parameter space
+                </div>
+                <div id="surfaceP50" style="height: 500px;"></div>
+            </div>
+
+            <div class="surface-card">
+                <h2>P95 Surface (95th Percentile)</h2>
+                <div class="formula-box">
+                    <strong>Formula:</strong> Φ<sub>P95</sub>(α, d<sub>min</sub>) =
+                    Percentile<sub>95</sub>[Φ<sub>i</sub>]<br>
+                    Optimistic flux estimate across parameter space
+                </div>
+                <div id="surfaceP95" style="height: 500px;"></div>
+            </div>
+
+            <div class="surface-card">
+                <h2>Uncertainty Range Surface</h2>
+                <div class="formula-box">
+                    <strong>Formula:</strong> ΔΦ(α, d<sub>min</sub>) = Φ<sub>P95</sub> - Φ<sub>P5</sub><br>
+                    Total uncertainty range across parameter space
+                </div>
+                <div id="surfaceRange" style="height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading">Computing surfaces... Please wait</div>
+
+    <script>
+        const DENSITIES = {
+            'Fiber': 0.95, 'Fragment': 1.20, 'Pellet': 1.15, 'Film': 0.92
+        };
+
+        const SHAPE_PROBS = {
+            'Fiber': 0.589, 'Fragment': 0.300, 'Pellet': 0.036, 'Film': 0.075
+        };
+
+        const POLYMER_PROBS = {
+            'PE': 0.332, 'PP': 0.270, 'PS': 0.085, 'PET': 0.138, 'PVC': 0.026, 'PA': 0.149
+        };
+
+        const TOTAL_ITEM_FLUX = 7.05e14; // items/yr (Matched to Model Output)
+
+        function sampleSizes(n, alpha, minUm, maxUm) {
+            const samples = [];
+            for (let i = 0; i < n; i++) {
+                const u = Math.random();
+                if (Math.abs(alpha - 1.0) < 0.01) {
+                    samples.push(minUm * Math.pow(maxUm / minUm, u));
+                } else {
+                    const term1 = Math.pow(maxUm, 1 - alpha);
+                    const term2 = Math.pow(minUm, 1 - alpha);
+                    samples.push(Math.pow((term1 - term2) * u + term2, 1 / (1 - alpha)));
+                }
+            }
+            return samples;
+        }
+
+        function calculateVolume(size, shape) {
+            if (shape === 'Fiber') {
+                const L = size;
+                const D = L / 10;
+                return Math.PI * Math.pow(D / 2, 2) * L;
+            } else if (shape === 'Fragment' || shape === 'Pellet') {
+                return (4 / 3) * Math.PI * Math.pow(size / 2, 3);
+            } else {
+                return Math.pow(size, 2) * 20;
+            }
+        }
+
+        function sampleFromDist(probs) {
+            const keys = Object.keys(probs);
+            const values = Object.values(probs);
+            const u = Math.random();
+            let cumsum = 0;
+            for (let i = 0; i < keys.length; i++) {
+                cumsum += values[i];
+                if (u <= cumsum) return keys[i];
+            }
+            return keys[keys.length - 1];
+        }
+
+        function estimateFlux(meanMassG) {
+            return (TOTAL_ITEM_FLUX * meanMassG / 1000) / 1e6;
+        }
+
+        function computeFluxAtPoint(alpha, minSize, maxSize, nSamples, nIterations) {
+            const fluxEstimates = [];
+
+            for (let iter = 0; iter < nIterations; iter++) {
+                const sizes = sampleSizes(nSamples, alpha, minSize, maxSize);
+                const masses = [];
+
+                for (let i = 0; i < nSamples; i++) {
+                    const shape = sampleFromDist(SHAPE_PROBS);
+                    const density = DENSITIES[shape] || 1.0;
+                    const volume = calculateVolume(sizes[i], shape);
+                    masses.push(volume * 1e-12 * density);
+                }
+
+                const meanMass = masses.reduce((a, b) => a + b, 0) / masses.length;
+                fluxEstimates.push(estimateFlux(meanMass));
+            }
+
+            fluxEstimates.sort((a, b) => a - b);
+            return {
+                p5: fluxEstimates[Math.floor(nIterations * 0.05)],
+                p50: fluxEstimates[Math.floor(nIterations * 0.50)],
+                p95: fluxEstimates[Math.floor(nIterations * 0.95)]
+            };
+        }
+
+        function computeSurfaces() {
+            const resolution = parseInt(document.getElementById('resSlider').value);
+            const maxSize = parseInt(document.getElementById('maxSizeSlider').value);
+            const nSamples = parseInt(document.getElementById('samplesSlider').value);
+            const nIterations = 50;
+
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                const alphaRange = [];
+                const minSizeRange = [];
+                for (let i = 0; i < resolution; i++) {
+                    alphaRange.push(2.0 + (3.5 - 2.0) * i / (resolution - 1));
+                    minSizeRange.push(50 + (300 - 50) * i / (resolution - 1));
+                }
+
+                const zP5 = [];
+                const zP50 = [];
+                const zP95 = [];
+                const zRange = [];
+
+                for (let i = 0; i < resolution; i++) {
+                    zP5.push([]);
+                    zP50.push([]);
+                    zP95.push([]);
+                    zRange.push([]);
+
+                    for (let j = 0; j < resolution; j++) {
+                        const result = computeFluxAtPoint(
+                            alphaRange[j], minSizeRange[i], maxSize, nSamples, nIterations
+                        );
+                        zP5[i].push(result.p5);
+                        zP50[i].push(result.p50);
+                        zP95[i].push(result.p95);
+                        zRange[i].push(result.p95 - result.p5);
+                    }
+                }
+
+                const layout = {
+                    scene: {
+                        xaxis: { title: 'α (Size Exponent)' },
+                        yaxis: { title: 'Min Size (μm)' },
+                        zaxis: { title: 'Flux (kt/yr)' },
+                        camera: { eye: { x: 1.5, y: 1.5, z: 1.3 } }
+                    },
+                    margin: { t: 0, b: 0, l: 0, r: 0 }
+                };
+
+                Plotly.newPlot('surfaceP5', [{
+                    type: 'surface',
+                    x: alphaRange,
+                    y: minSizeRange,
+                    z: zP5,
+                    colorscale: 'Blues',
+                    showscale: true
+                }], layout);
+
+                Plotly.newPlot('surfaceP50', [{
+                    type: 'surface',
+                    x: alphaRange,
+                    y: minSizeRange,
+                    z: zP50,
+                    colorscale: 'Greens',
+                    showscale: true
+                }], layout);
+
+                Plotly.newPlot('surfaceP95', [{
+                    type: 'surface',
+                    x: alphaRange,
+                    y: minSizeRange,
+                    z: zP95,
+                    colorscale: 'Reds',
+                    showscale: true
+                }], layout);
+
+                Plotly.newPlot('surfaceRange', [{
+                    type: 'surface',
+                    x: alphaRange,
+                    y: minSizeRange,
+                    z: zRange,
+                    colorscale: 'Viridis',
+                    showscale: true
+                }], layout);
+
+                document.getElementById('loading').style.display = 'none';
+            }, 100);
+        }
+
+        function updateValues() {
+            const res = document.getElementById('resSlider').value;
+            document.getElementById('resValue').textContent = `${res} × ${res}`;
+            document.getElementById('maxSizeValue').textContent = document.getElementById('maxSizeSlider').value;
+            document.getElementById('samplesValue').textContent = document.getElementById('samplesSlider').value;
+        }
+
+        document.getElementById('resSlider').addEventListener('change', () => {
+            updateValues();
+            computeSurfaces();
+        });
+        document.getElementById('maxSizeSlider').addEventListener('change', () => {
+            updateValues();
+            computeSurfaces();
+        });
+        document.getElementById('samplesSlider').addEventListener('change', () => {
+            updateValues();
+            computeSurfaces();
+        });
+
+        updateValues();
+        computeSurfaces();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Coastal Flux Intensity Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="coastal_data.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Updated header gradient to match the Green-Red theme appropriately without clashing */
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #34495e;
+            white-space: nowrap;
+        }
+
+        .control-group select,
+        .control-group input[type="range"] {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .control-group input[type="range"] {
+            width: 150px;
+        }
+
+        .value-display {
+            background: #27ae60;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            min-width: 250px;
+        }
+
+        .legend h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1em;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 5px;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .info-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stat-item {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        /* Second Info Panel for Item Flux (Top Right) */
+        .item-flux-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            /* Opposite side */
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 300px;
+            border-left: 4px solid #8e44ad;
+            /* Distinctive purple accent */
+        }
+
+        .item-flux-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .item-flux-value {
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        .legend-gradient {
+            height: 20px;
+            width: 100%;
+            /* Green -> Yellow -> Red Gradient */
+            background: linear-gradient(to right, #27ae60 0%, #f1c40f 50%, #c0392b 100%);
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Coastal Flux Intensity Map</h1>
+            <p>Global river plastic inputs (Visualized: Green=Low → Red=High)</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Metric:</label>
+                <select id="metricSelect">
+                    <option value="mass">Mass Flux (kt/yr)</option>
+                    <option value="items">Item Flux (items/yr)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Quantile:</label>
+                <select id="quantileSelect">
+                    <option value="p50">P50 (Median)</option>
+                    <option value="p5">P5 (Conservative)</option>
+                    <option value="p95">P95 (Optimistic)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Dot Radius:</label>
+                <input type="range" id="radiusSlider" min="2" max="10" step="1" value="4">
+                <span class="value-display" id="radiusValue">4px</span>
+            </div>
+
+            <div class="control-group">
+                <label>Color Contrast:</label>
+                <input type="range" id="contrastSlider" min="0.1" max="2.0" step="0.1" value="1.0">
+                <span class="value-display" id="contrastValue">1.0</span>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+
+            <div class="info-panel">
+                <h3>Mass Flux Statistics</h3>
+                <div class="stat-item">Visible Basins: <span class="stat-value" id="visibleBasins">-</span></div>
+                <div class="stat-item">Visible Mass: <span class="stat-value" id="visibleFlux">-</span> kt/yr</div>
+                <div class="stat-item">Global Mass: <span class="stat-value" id="globalTotal">-</span> kt/yr</div>
+            </div>
+
+            <!-- New Separate Panel for Item Flux -->
+            <div class="item-flux-panel">
+                <h3>Item Flux Statistics</h3>
+                <div class="stat-item">Visible Items: <span class="item-flux-value" id="visibleItems">-</span> yr⁻¹
+                </div>
+                <div class="stat-item">Global Items: <span class="item-flux-value" id="globalItems">-</span> yr⁻¹</div>
+            </div>
+
+            <div class="legend">
+                <h4 id="legendTitle">Flux Intensity (kt/yr)</h4>
+                <div class="legend-gradient"></div>
+                <div class="legend-labels">
+                    <span>Low</span>
+                    <span>Medium</span>
+                    <span>High</span>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.85em; color: #666;">
+                    Loading scale...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let coastalData = [];
+        let map;
+        let markersLayer;
+
+        // Green-Yellow-Red Interpolation
+        function getHeatColor(t) {
+            // t is 0..1
+            // 0.0 -> Green (#27ae60)
+            // 0.5 -> Yellow (#f1c40f)
+            // 1.0 -> Red (#c0392b)
+
+            if (t <= 0) return '#27ae60';
+            if (t >= 1) return '#c0392b';
+
+            if (t < 0.5) {
+                // Green to Yellow (0..0.5 maps to 0..1)
+                return interpolateColor('#27ae60', '#f1c40f', t * 2);
+            } else {
+                // Yellow to Red (0.5..1 maps to 0..1)
+                return interpolateColor('#f1c40f', '#c0392b', (t - 0.5) * 2);
+            }
+        }
+
+        function interpolateColor(c1, c2, factor) {
+            const r1 = parseInt(c1.substring(1, 3), 16);
+            const g1 = parseInt(c1.substring(3, 5), 16);
+            const b1 = parseInt(c1.substring(5, 7), 16);
+
+            const r2 = parseInt(c2.substring(1, 3), 16);
+            const g2 = parseInt(c2.substring(3, 5), 16);
+            const b2 = parseInt(c2.substring(5, 7), 16);
+
+            const r = Math.round(r1 + factor * (r2 - r1));
+            const g = Math.round(g1 + factor * (g2 - g1));
+            const b = Math.round(b1 + factor * (b2 - b1));
+
+            return `rgb(${r},${g},${b})`;
+        }
+
+        // Data Loading
+        if (window.COASTAL_DATA) {
+            coastalData = window.COASTAL_DATA.basins;
+            // Normalization check
+            if (coastalData.length > 0) {
+                coastalData.forEach(d => {
+                    if (d.flux_baseline === undefined && d.flux_kt !== undefined) d.flux_baseline = d.flux_kt;
+                });
+            }
+            console.log(`Loaded ${coastalData.length} basins.`);
+
+            if (document.getElementById('globalTotal')) {
+                const total = window.COASTAL_DATA.total_flux_kt || window.COASTAL_DATA.total_flux || 0;
+                document.getElementById('globalTotal').textContent = total.toLocaleString(undefined, { maximumFractionDigits: 1 });
+            }
+            if (document.getElementById('globalItems')) {
+                const totalItems = window.COASTAL_DATA.total_items_yr || 0;
+                // Use scientific notation for items
+                document.getElementById('globalItems').textContent = totalItems.toExponential(2);
+            }
+        } else {
+            console.error("Coastal data not loaded!");
+        }
+
+        function initMap() {
+            map = L.map('map', {
+                center: [20, 0],
+                zoom: 2,
+                minZoom: 2,
+                preferCanvas: true
+            });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap, &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            markersLayer = L.layerGroup().addTo(map);
+            map.on('moveend', updateStats);
+        }
+
+        function updateStats() {
+            const bounds = map.getBounds();
+            let visibleCount = 0;
+            let visibleFlux = 0;
+            let visibleItems = 0;
+
+            const quantile = document.getElementById('quantileSelect').value;
+            const factor = quantile === 'p50' ? 1.0 : (quantile === 'p5' ? 0.3 : 2.5);
+
+            coastalData.forEach(b => {
+                if (bounds.contains([b.lat, b.lon])) {
+                    visibleCount++;
+                    visibleFlux += (b.flux_baseline || 0) * factor;
+                    visibleItems += (b.flux_items || 0) * factor; // Assuming linear scaling for items too
+                }
+            });
+
+            document.getElementById('visibleBasins').textContent = visibleCount.toLocaleString();
+            document.getElementById('visibleFlux').textContent = visibleFlux.toFixed(4); // More precision for small fluxes
+            document.getElementById('visibleItems').textContent = visibleItems.toExponential(2);
+        }
+
+        function updateMap() {
+            const metric = document.getElementById('metricSelect').value; // 'mass' or 'items'
+            const quantile = document.getElementById('quantileSelect').value;
+            const radius = parseInt(document.getElementById('radiusSlider').value);
+            const contrast = parseFloat(document.getElementById('contrastSlider').value);
+
+            // Update Legend Title
+            const legendTitle = document.getElementById('legendTitle');
+            if (metric === 'mass') legendTitle.textContent = "Mass Flux Intensity (kt/yr)";
+            else legendTitle.textContent = "Item Flux Intensity (items/yr)";
+
+            markersLayer.clearLayers();
+
+            let multiplier = 1.0;
+            if (quantile === 'p5') multiplier = 0.3;
+            if (quantile === 'p95') multiplier = 2.5;
+
+            // 1. Calculate Dynamic Range from Data (P1 to P99)
+            // This 'stretches' the color scale to fit the actual data distribution
+            const getDataValue = (d) => metric === 'mass' ? (d.flux_baseline || 0) : (d.flux_items || 0);
+
+            const allFluxes = coastalData.map(d => getDataValue(d) * multiplier).filter(v => v > 0).sort((a, b) => a - b);
+
+            let minVal = 0.000001;
+            let maxVal = 0.1;
+
+            if (allFluxes.length > 10) {
+                // Use P1 and P99 to define the range, ignoring extreme outliers
+                const p1 = allFluxes[Math.floor(allFluxes.length * 0.01)];
+                const p99 = allFluxes[Math.floor(allFluxes.length * 0.99)];
+                if (p99 > p1) {
+                    minVal = p1;
+                    maxVal = p99;
+                }
+            }
+
+            // Logarithmic Scale Domain
+            const minLog = Math.log(minVal);
+            const maxLog = Math.log(maxVal);
+            const logRange = maxLog - minLog;
+
+            updateLegend(minVal, maxVal);
+
+            const markers = [];
+
+            coastalData.forEach(basin => {
+                const rawVal = getDataValue(basin);
+                const val = rawVal * multiplier;
+                if (val <= 0) return;
+
+                let logVal = Math.log(val);
+                let norm = (logVal - minLog) / logRange;
+
+                // Clamp to [0,1]
+                norm = Math.max(0, Math.min(1, norm));
+
+                // Apply user contrast adjustment
+                if (contrast !== 1.0) {
+                    norm = Math.pow(norm, 1 / contrast);
+                }
+
+                const color = getHeatColor(norm);
+
+                const marker = L.circleMarker([basin.lat, basin.lon], {
+                    radius: radius,
+                    fillColor: color,
+                    color: 'transparent',
+                    weight: 0,
+                    fillOpacity: 0.85
+                });
+
+                let disDisplay = basin.discharge ? (basin.discharge > 1e6 ? (basin.discharge / 1e9).toFixed(3) + " km³/yr" : (basin.discharge / 1e6).toFixed(3) + " Mm³/yr") : "N/A";
+
+                // Prepare display strings for BOTH metrics
+                let massFlux = (basin.flux_baseline || 0) * multiplier;
+                let itemFlux = (basin.flux_items || 0) * multiplier;
+
+                let massDisplay = massFlux < 0.001 ? massFlux.toExponential(2) : massFlux.toFixed(4);
+                let itemDisplay = itemFlux.toExponential(2);
+
+                // Highlight the selected one in bold
+                let massLine = metric === 'mass' ? `<b>Mass Flux: ${massDisplay} kt/yr</b>` : `Mass Flux: ${massDisplay} kt/yr`;
+                let itemLine = metric === 'items' ? `<b>Item Flux: ${itemDisplay} yr⁻¹</b>` : `Item Flux: ${itemDisplay} yr⁻¹`;
+
+                marker.bindPopup(`
+                    <strong>Basin ID: ${basin.id}</strong><br>
+                    <div style="margin-top:4px; border-top:1px solid #eee; padding-top:4px;">
+                    ${massLine}<br>
+                    ${itemLine}<br>
+                    <span style="color:#666; font-size:0.9em">Discharge: ${disDisplay}</span>
+                    </div>
+                `);
+
+                markers.push(marker);
+            });
+
+            if (markers.length > 0) {
+                L.layerGroup(markers).addTo(markersLayer);
+            }
+
+            updateStats();
+        }
+
+        function updateLegend(min, max) {
+            const labels = document.querySelectorAll('.legend-labels span');
+            if (labels.length === 3) {
+                const fmt = v => v < 0.01 ? v.toExponential(1) : v.toFixed(2);
+
+                labels[0].textContent = fmt(min);
+                // Geometric mean for the midpoint of a log scale
+                labels[1].textContent = fmt(Math.exp((Math.log(min) + Math.log(max)) / 2));
+                labels[2].textContent = fmt(max);
+            }
+
+            const legendNote = document.querySelector('.legend div:last-child');
+            if (legendNote) {
+                const unit = document.getElementById('metricSelect').value === 'mass' ? 'kt/yr' : 'items/yr';
+                legendNote.textContent = `* Scale: Dynamic Log (${min.toExponential(1)} - ${max.toExponential(1)} ${unit})`;
+            }
+        }
+
+        document.getElementById('metricSelect').addEventListener('change', updateMap);
+        document.getElementById('quantileSelect').addEventListener('change', updateMap);
+        document.getElementById('radiusSlider').addEventListener('input', (e) => {
+            document.getElementById('radiusValue').textContent = e.target.value + 'px';
+            updateMap();
+        });
+        document.getElementById('contrastSlider').addEventListener('input', (e) => {
+            document.getElementById('contrastValue').textContent = e.target.value;
+            updateMap();
+        });
+
+        initMap();
+        setTimeout(updateMap, 100);
+    </script>
+</body>
+
+</html>

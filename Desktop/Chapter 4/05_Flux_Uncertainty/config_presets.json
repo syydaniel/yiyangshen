@@ -1,0 +1,99 @@
+{
+  "scenarios": {
+    "conservative": {
+      "name": "Conservative",
+      "description": "Lower bound estimate with small particles and low density polymers",
+      "parameters": {
+        "alpha": 3.0,
+        "min_size_um": 50,
+        "max_size_um": 3000,
+        "mc_samples": 5000
+      },
+      "prior_adjustments": {
+        "emphasize_fibers": false,
+        "emphasize_low_density": true
+      }
+    },
+    "median": {
+      "name": "Median (Literature)",
+      "description": "Based on Kooi et al. (2021) and observed distributions",
+      "parameters": {
+        "alpha": 2.64,
+        "min_size_um": 100,
+        "max_size_um": 5000,
+        "mc_samples": 3000
+      },
+      "prior_adjustments": {
+        "emphasize_fibers": false,
+        "emphasize_low_density": false
+      }
+    },
+    "optimistic": {
+      "name": "Optimistic",
+      "description": "Upper bound with larger particles and high density polymers",
+      "parameters": {
+        "alpha": 2.2,
+        "min_size_um": 200,
+        "max_size_um": 8000,
+        "mc_samples": 5000
+      },
+      "prior_adjustments": {
+        "emphasize_fibers": false,
+        "emphasize_low_density": false
+      }
+    }
+  },
+  
+  "plot_annotations": {
+    "shape_distribution": {
+      "title": "Shape Probability Distribution",
+      "what": "Observed shape frequencies in environmental samples",
+      "why": "Different shapes have different volume-to-size relationships",
+      "how_to_read": "Higher bars = more common in observations"
+    },
+    "polymer_distribution": {
+      "title": "Polymer Type Distribution",
+      "what": "Observed polymer composition from field studies",
+      "why": "Polymer density directly affects particle mass",
+      "how_to_read": "PE/PP (low density) vs PET/PVC (high density)"
+    },
+    "size_distribution": {
+      "title": "Size Distribution (Power Law)",
+      "what": "Theoretical particle size frequency",
+      "why": "Smaller particles are exponentially more abundant",
+      "how_to_read": "Log scale: steep slope = more small particles"
+    },
+    "mass_distribution": {
+      "title": "Particle Mass Distribution",
+      "what": "Simulated individual particle masses",
+      "why": "Shows spread in mass per particle",
+      "how_to_read": "Vertical lines mark quantiles (P5, P50, P95)"
+    },
+    "surface_p5": {
+      "title": "P5 (Lower Bound) Surface",
+      "what": "5th percentile flux across parameter space",
+      "why": "Conservative estimate - only 5% of particles are lighter",
+      "how_to_read": "Red peak = highest flux, blue = lowest. Extrema marked."
+    },
+    "surface_p50": {
+      "title": "P50 (Median) Surface",
+      "what": "50th percentile (median) flux across parameters",
+      "why": "Best estimate - half particles lighter, half heavier",
+      "how_to_read": "Center of uncertainty range"
+    },
+    "surface_p95": {
+      "title": "P95 (Upper Bound) Surface",
+      "what": "95th percentile flux across parameter space",
+      "why": "Optimistic estimate - only 5% of particles are heavier",
+      "how_to_read": "Shows maximum plausible flux"
+    }
+  },
+  
+  "reference_values": {
+    "literature_estimates": {
+      "Lebreton2017": {"value": 1150, "unit": "kt/yr", "notes": "Global riverine input"},
+      "Meijer2021": {"value": 1000, "unit": "kt/yr", "notes": "Top 1000 rivers"},
+      "Borrelle2020": {"value": 1700, "unit": "kt/yr", "notes": "Total mismanaged plastic"}
+    }
+  }
+}

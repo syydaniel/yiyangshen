@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Microplastic Flux - Analysis Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 4px solid #667eea;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 18px 30px;
+            border: none;
+            background: transparent;
+            color: #34495e;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(102, 126, 234, 0.2), transparent);
+            transition: height 0.3s ease;
+        }
+
+        .tab-button.active::before {
+            height: 100%;
+        }
+
+        .content-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .welcome-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: white;
+            flex-direction: column;
+            padding: 40px;
+        }
+
+        .welcome-screen h2 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .welcome-screen p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1em;
+            margin-bottom: 0;
+        }
+
+        .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🌊 Coastal Microplastic Flux - Interactive Analysis Hub</h1>
+        <p>Comprehensive uncertainty quantification and parameter space exploration</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="tab-button active" onclick="showTab('welcome')">
+            🏠 Home
+        </button>
+        <button class="tab-button" onclick="showTab('dashboard')">
+            📊 Interactive Dashboard
+        </button>
+        <button class="tab-button" onclick="showTab('surface')">
+            🌐 3D Surface Explorer
+        </button>
+        <button class="tab-button" onclick="showTab('map')">
+            🗺️ Global Map
+        </button>
+    </div>
+
+    <div class="content-area">
+        <div id="welcome" class="tab-content active">
+            <div class="welcome-screen">
+                <h2>Welcome to the Flux Analysis Hub</h2>
+                <p>
+                    This integrated platform provides comprehensive tools for analyzing coastal microplastic flux
+                    uncertainty
+                    using Monte Carlo simulations and high-dimensional parameter space exploration.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="showTab('dashboard')">
+                        <div class="icon">📊</div>
+                        <h3>Interactive Dashboard</h3>
+                        <p>Real-time Monte Carlo analysis with 1000 iterations</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">
+                            • Quantile analysis (P5/P50/P95)<br>
+                            • Convergence monitoring<br>
+                            • Preset scenarios<br>
+                            • Mathematical formulas
+                        </p>
+                    </div>
+
+                    <div class="feature-card" onclick="showTab('surface')">
+                        <div class="icon">🌐</div>
+                        <h3>3D Surface Explorer</h3>
+                        <p>High-dimensional parameter space visualization</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">
+                            • 4 interactive surfaces<br>
+                            • Adjustable resolution<br>
+                            • P5/P50/P95 surfaces<br>
+                            • Uncertainty range mapping
+                        </p>
+                    </div>
+
+                    <div class="feature-card" onclick="showTab('map')">
+                        <div class="icon">🗺️</div>
+                        <h3>Global Map Visualization</h3>
+                        <p>Interactive world map of coastal flux distribution</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">
+                            • Level 12 coastal basins<br>
+                            • Size-coded markers<br>
+                            • Adjustable parameters<br>
+                            • Real-time updates
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard" class="tab-content">
+        <div class="loading">Loading dashboard...</div>
+        <iframe id="dashboardFrame" src=""></iframe>
+    </div>
+
+    <div id="surface" class="tab-content">
+        <div class="loading">Loading surface explorer...</div>
+        <iframe id="surfaceFrame" src=""></iframe>
+    </div>
+
+    <div id="map" class="tab-content">
+        <div class="loading">Loading map visualization...</div>
+        <iframe id="mapFrame" src=""></iframe>
+    </div>
+    </div>
+
+    <script>
+        let dashboardLoaded = false;
+        let surfaceLoaded = false;
+        let mapLoaded = false;
+
+        function showTab(tabName) {
+            // Update tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+
+            // Lazy load iframes
+            if (tabName === 'dashboard' && !dashboardLoaded) {
+                const loading = document.querySelector('#dashboard .loading');
+                loading.style.display = 'block';
+                const iframe = document.getElementById('dashboardFrame');
+                iframe.src = 'Flux_Dashboard.html';
+                iframe.onload = () => {
+                    loading.style.display = 'none';
+                    dashboardLoaded = true;
+                };
+            }
+
+            if (tabName === 'surface' && !surfaceLoaded) {
+                const loading = document.querySelector('#surface .loading');
+                loading.style.display = 'block';
+                const iframe = document.getElementById('surfaceFrame');
+                iframe.src = 'Surface_Explorer_3D.html';
+                iframe.onload = () => {
+                    loading.style.display = 'none';
+                    surfaceLoaded = true;
+                };
+            }
+
+            if (tabName === 'map' && !mapLoaded) {
+                const loading = document.querySelector('#map .loading');
+                loading.style.display = 'block';
+                const iframe = document.getElementById('mapFrame');
+                iframe.src = 'Map_Visualization.html';
+                iframe.onload = () => {
+                    loading.style.display = 'none';
+                    mapLoaded = true;
+                };
+            }
+        }
+
+        // Disable cache for iframes
+        window.addEventListener('beforeunload', function () {
+            document.getElementById('dashboardFrame').src = '';
+            document.getElementById('surfaceFrame').src = '';
+            document.getElementById('mapFrame').src = '';
+        });
+    </script>
+</body>
+
+</html>

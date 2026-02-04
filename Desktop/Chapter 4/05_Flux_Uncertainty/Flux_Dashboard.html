@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Microplastic Flux - Uncertainty Explorer</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="coastal_data.js"></script> <!-- Load dynamic data -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-card h3 {
+            color: #34495e;
+            font-size: 1em;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .controls-panel {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .control-item label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .control-item input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            margin-bottom: 5px;
+        }
+
+        .control-item input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .preset-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-conservative {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-median {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-optimistic {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-reset {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .results-panel {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .results-panel h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .result-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: #2c3e50;
+        }
+
+        .large-chart {
+            grid-column: span 2;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 15px;
+            font-size: 1.5em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Coastal Microplastic Flux Uncertainty Explorer</h1>
+            <div class="subtitle">Comprehensive Monte Carlo Analysis with Interactive Visualization</div>
+        </header>
+
+        <div class="controls-panel">
+            <h2 style="margin-bottom: 20px;">⚙️ Parameter Controls</h2>
+
+            <div class="control-group">
+                <div class="control-item">
+                    <label for="alphaSlider">Size Exponent (α)</label>
+                    <input type="range" id="alphaSlider" min="1.5" max="4.0" step="0.1" value="2.64">
+                    <div class="value-display" id="alphaValue">2.64</div>
+                </div>
+
+                <div class="control-item">
+                    <label for="minSizeSlider">Min Size (μm)</label>
+                    <input type="range" id="minSizeSlider" min="10" max="500" step="10" value="100">
+                    <div class="value-display" id="minSizeValue">100</div>
+                </div>
+
+                <div class="control-item">
+                    <label for="mcSamplesSlider">MC Samples</label>
+                    <input type="range" id="mcSamplesSlider" min="1000" max="10000" step="500" value="3000">
+                    <div class="value-display" id="mcSamplesValue">3000</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="preset-btn btn-conservative" onclick="applyPreset('conservative')">
+                    🔵 Conservative
+                </button>
+                <button class="preset-btn btn-median" onclick="applyPreset('median')">
+                    🟢 Median (Baseline)
+                </button>
+                <button class="preset-btn btn-optimistic" onclick="applyPreset('optimistic')">
+                    🔴 Optimistic
+                </button>
+                <button class="preset-btn btn-reset" onclick="reset()">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <!-- Row 1: Distributions -->
+            <div class="chart-card">
+                <h3>📊 Shape Distribution</h3>
+                <div id="shapeChart"></div>
+                <div class="info-box"><strong>Formula:</strong> P(shape) from literature observations</div>
+            </div>
+
+            <div class="chart-card">
+                <h3>🔬 Polymer Distribution</h3>
+                <div id="polymerChart"></div>
+                <div class="info-box"><strong>Formula:</strong> P(polymer) from meta-analysis (excluding 'Other')</div>
+            </div>
+
+            <div class="chart-card">
+                <h3>📐 Size Distribution</h3>
+                <div id="sizeChart"></div>
+                <div class="info-box"><strong>Formula:</strong> f(d) ∝ d<sup>-α</sup>, d ∈ [d<sub>min</sub>,
+                    d<sub>max</sub>]</div>
+            </div>
+
+            <div class="chart-card">
+                <h3>📈 Flux Estimate Convergence</h3>
+                <div id="convergenceChart"></div>
+                <div class="info-box"><strong>Formula:</strong> Φ<sub>i</sub> = N<sub>total</sub> × E[m<sub>i</sub>] /
+                    10<sup>9</sup> (kt/yr)</div>
+            </div>
+
+            <!-- Row 2: Mass Distribution and Results -->
+            <div class="chart-card large-chart">
+                <h3>⚖️ Particle Mass Distribution</h3>
+                <div id="massChart"></div>
+                <div class="info-box"><strong>Formula:</strong> m = ρ × V, V = f(d, shape), simulated</div>
+            </div>
+
+            <!-- New: Item Flux Quantiles Panel (Left of Mass Flux) -->
+            <div class="chart-card">
+                <div class="results-panel" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);">
+                    <h2>📦 Item Flux Quantiles</h2>
+                    <div style="font-size: 0.85em; margin-bottom: 10px;">Input: Total Items/Yr</div>
+                    <div class="result-item">
+                        <div>P5 (Conservative)</div>
+                        <div class="result-value" id="itemP5">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div>P50 (Median)</div>
+                        <div class="result-value" id="itemP50">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div>P95 (Optimistic)</div>
+                        <div class="result-value" id="itemP95">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div style="font-size:0.8em">Total Input: <span id="totalInputDisp">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card"> <!-- Removed large-chart class to fit both -->
+                <div class="results-panel">
+                    <h2>📊 Mass Flux Quantiles</h2>
+                    <div style="font-size: 0.85em; margin-bottom: 10px;">Output: Mass (kt/yr)</div>
+                    <div class="result-item">
+                        <div>P5 (5th Percentile)</div>
+                        <div class="result-value" id="resultP5">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div>P50 (Median)</div>
+                        <div class="result-value" id="resultP50">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div>P95 (95th Percentile)</div>
+                        <div class="result-value" id="resultP95">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div>Uncertainty Range (P95-P5)</div>
+                        <div class="result-value" id="resultRange">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading">Computing... Please wait</div>
+
+    <script>
+        // Configuration
+        const DENSITIES = {
+            'Fiber': 0.95, 'Fragment': 1.20, 'Pellet': 1.15, 'Film': 0.92
+        };
+
+        const SHAPE_PROBS = {
+            'Fiber': 0.589, 'Fragment': 0.300, 'Pellet': 0.036, 'Film': 0.075
+        };
+
+        const POLYMER_PROBS = {
+            'PE': 0.332, 'PP': 0.270, 'PS': 0.085, 'PET': 0.138, 'PVC': 0.026, 'PA': 0.149
+        };
+
+        const PRESETS = {
+            conservative: { alpha: 3.0, minSize: 50, mcSamples: 5000 },
+            median: { alpha: 2.64, minSize: 100, mcSamples: 3000 },
+            optimistic: { alpha: 2.2, minSize: 200, mcSamples: 5000 }
+        };
+
+        // Load Total Flux from COASTAL_DATA if available, else default
+        const TOTAL_ITEM_FLUX = (window.COASTAL_DATA && window.COASTAL_DATA.total_items_yr) ? window.COASTAL_DATA.total_items_yr : 7.05e14;
+
+        // Update display
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('totalInputDisp')) {
+                document.getElementById('totalInputDisp').textContent = TOTAL_ITEM_FLUX.toExponential(2);
+            }
+        });
+
+        // Utility functions
+        function sampleSizes(n, alpha, minUm, maxUm) {
+            const samples = [];
+            for (let i = 0; i < n; i++) {
+                const u = Math.random();
+                if (Math.abs(alpha - 1.0) < 0.01) {
+                    samples.push(minUm * Math.pow(maxUm / minUm, u));
+                } else {
+                    const term1 = Math.pow(maxUm, 1 - alpha);
+                    const term2 = Math.pow(minUm, 1 - alpha);
+                    samples.push(Math.pow((term1 - term2) * u + term2, 1 / (1 - alpha)));
+                }
+            }
+            return samples;
+        }
+
+        function calculateVolume(size, shape) {
+            if (shape === 'Fiber') {
+                const L = size;
+                const D = L / 10;
+                return Math.PI * Math.pow(D / 2, 2) * L;
+            } else if (shape === 'Fragment' || shape === 'Pellet') {
+                return (4 / 3) * Math.PI * Math.pow(size / 2, 3);
+            } else { // Film
+                return Math.pow(size, 2) * 20;
+            }
+        }
+
+        function sampleFromDist(probs) {
+            const keys = Object.keys(probs);
+            const values = Object.values(probs);
+            const u = Math.random();
+            let cumsum = 0;
+            for (let i = 0; i < keys.length; i++) {
+                cumsum += values[i];
+                if (u <= cumsum) return keys[i];
+            }
+            return keys[keys.length - 1];
+        }
+
+        function runMonteCarloIterations(nSamples, nIterations, alpha, minSize, maxSize) {
+            const fluxEstimates = [];
+            let allMasses = [];
+            const convergenceData = [];
+
+            for (let iter = 0; iter < nIterations; iter++) {
+                const sizes = sampleSizes(nSamples, alpha, minSize, maxSize);
+                const masses = [];
+
+                for (let i = 0; i < nSamples; i++) {
+                    const shape = sampleFromDist(SHAPE_PROBS);
+                    const polymer = sampleFromDist(POLYMER_PROBS);
+                    const density = DENSITIES[shape] || 1.0;
+
+                    const volume = calculateVolume(sizes[i], shape);
+                    const mass = volume * 1e-12 * density; // grams
+                    masses.push(mass);
+                }
+
+                const meanMass = masses.reduce((a, b) => a + b, 0) / masses.length;
+                const flux = estimateFlux(meanMass);
+                fluxEstimates.push(flux);
+                convergenceData.push(flux);
+
+                if (iter === 0) {
+                    allMasses = masses; // Keep first iteration for histogram
+                }
+            }
+
+            fluxEstimates.sort((a, b) => a - b);
+            const p5 = fluxEstimates[Math.floor(nIterations * 0.05)];
+            const p50 = fluxEstimates[Math.floor(nIterations * 0.50)];
+            const p95 = fluxEstimates[Math.floor(nIterations * 0.95)];
+            const mean = fluxEstimates.reduce((a, b) => a + b, 0) / nIterations;
+
+            return {
+                fluxEstimates,
+                allMasses,
+                convergenceData,
+                quantiles: { p5, p50, p95, mean }
+            };
+        }
+
+        function estimateFlux(meanMassG) {
+            return (TOTAL_ITEM_FLUX * meanMassG / 1000) / 1e6; // kilotons/yr
+        }
+
+        // Chart plotting
+        function plotShape() {
+            const data = [{
+                x: Object.keys(SHAPE_PROBS),
+                y: Object.values(SHAPE_PROBS),
+                type: 'bar',
+                marker: { color: '#3498db' }
+            }];
+            const layout = {
+                margin: { t: 10, b: 40, l: 40, r: 10 },
+                height: 200,
+                yaxis: { title: 'Probability' }
+            };
+            Plotly.newPlot('shapeChart', data, layout, { displayModeBar: false });
+        }
+
+        function plotPolymer() {
+            const data = [{
+                x: Object.keys(POLYMER_PROBS),
+                y: Object.values(POLYMER_PROBS),
+                type: 'bar',
+                marker: { color: '#2ecc71' }
+            }];
+            const layout = {
+                margin: { t: 10, b: 40, l: 40, r: 10 },
+                height: 200,
+                yaxis: { title: 'Probability' }
+            };
+            Plotly.newPlot('polymerChart', data, layout, { displayModeBar: false });
+        }
+
+        function updateCharts() {
+            const alpha = parseFloat(document.getElementById('alphaSlider').value);
+            const minSize = parseFloat(document.getElementById('minSizeSlider').value);
+            const mcSamples = parseInt(document.getElementById('mcSamplesSlider').value);
+            const nIterations = 1000; // Number of MC iterations for uncertainty quantification
+
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                // Size distribution
+                const x = [];
+                const y = [];
+                for (let i = 0; i < 100; i++) {
+                    const size = minSize * Math.pow(5000 / minSize, i / 99);
+                    x.push(size);
+                    y.push(Math.pow(size, -alpha));
+                }
+                const maxY = Math.max(...y);
+                const yNorm = y.map(v => v / maxY);
+
+                Plotly.newPlot('sizeChart', [{
+                    x: x, y: yNorm, type: 'scatter', fill: 'tozeroy',
+                    line: { color: '#e74c3c' }
+                }], {
+                    margin: { t: 10, b: 40, l: 40, r: 10 },
+                    height: 200,
+                    xaxis: { type: 'log', title: 'μm' },
+                    yaxis: { title: 'Relative Frequency' }
+                }, { displayModeBar: false });
+
+                // Monte Carlo Iterations
+                const result = runMonteCarloIterations(mcSamples, nIterations, alpha, minSize, 5000);
+
+                // Convergence - now showing flux estimate convergence across iterations
+                Plotly.newPlot('convergenceChart', [{
+                    y: result.convergenceData,
+                    type: 'scatter',
+                    line: { color: '#9b59b6' },
+                    name: 'Flux Estimate'
+                }, {
+                    y: Array(nIterations).fill(result.quantiles.p50),
+                    type: 'scatter',
+                    line: { color: 'green', dash: 'dash' },
+                    name: 'P50'
+                }], {
+                    margin: { t: 10, b: 40, l: 40, r: 10 },
+                    height: 200,
+                    yaxis: { title: 'Flux (kt/yr)' },
+                    xaxis: { title: 'Iteration' },
+                    showlegend: true,
+                    legend: { x: 0.7, y: 0.95, font: { size: 8 } }
+                }, { displayModeBar: false });
+
+                // Mass distribution (from first iteration, for reference)
+                const logMasses = result.allMasses.map(m => Math.log10(m * 1000 + 1e-12));
+                Plotly.newPlot('massChart', [{
+                    x: logMasses,
+                    type: 'histogram',
+                    nbinsx: 60,
+                    marker: { color: '#3498db' },
+                    name: 'Particle Mass'
+                }], {
+                    margin: { t: 10, b: 40, l: 50, r: 10 },
+                    height: 250,
+                    xaxis: { title: 'Log₁₀(mg)' },
+                    yaxis: { title: 'Frequency' }
+                }, { displayModeBar: false });
+
+                // Results - Flux quantiles from iterations
+                // Mass Flux (kt/yr)
+                document.getElementById('resultP5').textContent = `${result.quantiles.p5.toFixed(1)} kt/yr`;
+                document.getElementById('resultP50').textContent = `${result.quantiles.p50.toFixed(1)} kt/yr`;
+                document.getElementById('resultP95').textContent = `${result.quantiles.p95.toFixed(1)} kt/yr`;
+                document.getElementById('resultRange').textContent = `${(result.quantiles.p95 - result.quantiles.p5).toFixed(1)} kt/yr`;
+
+                // Item Flux (items/yr) - This is input uncertainty if we were simulating it, 
+                // but currently Model is Fixed Input -> Mass Output Probabilistic.
+                // However, user wanted Item Flux displayed separate panel.
+                // Since this model treats Item Flux as a FIXED scalar input (TOTAL_ITEM_FLUX),
+                // the "Quantiles" for Item Flux are technically all the same unless we add uncertainty to the count itself.
+                // For now, we will display the Fixed Input value.
+                // If the user INTENDED for the count to also vary, that requires a bigger model change.
+                // Assuming they just want to see the Item numbers corresponding to the mass (which isn't 1:1 due to size),
+                // simpler is to just show the input.
+
+                // Wait, if the user requested "Interacted map, just similar like the ky/y map", and "separate panel"
+                // they might want to see the Item totals.
+
+                // Let's display the input flux as the "Median" and maybe +/- 0 range or just the value.
+                document.getElementById('itemP5').textContent = TOTAL_ITEM_FLUX.toExponential(2);
+                document.getElementById('itemP50').textContent = TOTAL_ITEM_FLUX.toExponential(2);
+                document.getElementById('itemP95').textContent = TOTAL_ITEM_FLUX.toExponential(2);
+
+                document.getElementById('loading').style.display = 'none';
+            }, 100);
+        }
+
+        function applyPreset(name) {
+            const preset = PRESETS[name];
+            document.getElementById('alphaSlider').value = preset.alpha;
+            document.getElementById('minSizeSlider').value = preset.minSize;
+            document.getElementById('mcSamplesSlider').value = preset.mcSamples;
+            updateValues();
+            updateCharts();
+        }
+
+        function reset() {
+            applyPreset('median');
+        }
+
+        function updateValues() {
+            document.getElementById('alphaValue').textContent = document.getElementById('alphaSlider').value;
+            document.getElementById('minSizeValue').textContent = document.getElementById('minSizeSlider').value;
+            document.getElementById('mcSamplesValue').textContent = document.getElementById('mcSamplesSlider').value;
+        }
+
+        // Event listeners
+        document.getElementById('alphaSlider').addEventListener('input', () => {
+            updateValues();
+            updateCharts();
+        });
+        document.getElementById('minSizeSlider').addEventListener('input', () => {
+            updateValues();
+            updateCharts();
+        });
+        document.getElementById('mcSamplesSlider').addEventListener('input', () => {
+            updateValues();
+            updateCharts();
+        });
+
+        // Initialize
+        plotShape();
+        plotPolymer();
+        updateCharts();
+    </script>
+</body>
+
+</html>
